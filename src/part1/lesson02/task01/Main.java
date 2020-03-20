@@ -4,6 +4,14 @@ public class Main
 {
     public static void main(String[] args)
     {
-        System.out.println(1+2);
+        //region Входные данные
+        float literOfGasoline = 50.0f; // Количество литров бензина
+        float costOfALiter = 43.0f; // Cтоимость литра бензина в рублях
+        // endregion
+
+        float result = literOfGasoline * costOfALiter; // Расчет результата
+
+        // Вывод результата
+        System.out.println("Стоимость " + literOfGasoline + " литров бензина: " + result + " рублей.");
     }
 }
