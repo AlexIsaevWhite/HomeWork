@@ -40,7 +40,8 @@ public class Main
             }
             catch (NumberFormatException e)
             {
-                number = memory;
+                number = -1;
+                memory = 0;
             }
             //endregion
 
