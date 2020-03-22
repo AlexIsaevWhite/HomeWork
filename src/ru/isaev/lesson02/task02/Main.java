@@ -1,4 +1,4 @@
-package part1.lesson02.task02;
+package ru.isaev.lesson02.task02;
 
 public class Main
 {
