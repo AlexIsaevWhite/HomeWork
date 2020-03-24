@@ -1,9 +1,5 @@
 package ru.isaev.lesson03.task04.version02;
 
-import com.sun.source.tree.TypeParameterTree;
-
-import javax.lang.model.element.TypeElement;
-import java.lang.reflect.Type;
 import java.util.Random;
 import java.util.Scanner;
 
