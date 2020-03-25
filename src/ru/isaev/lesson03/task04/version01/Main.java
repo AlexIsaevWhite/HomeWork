@@ -18,7 +18,7 @@ public class Main
         int number;                                 // Инициализация переменной для проверки соотношения входных данных к числу
         //endregion
 
-        {   // Генерация случайного значения от 0 до 100 в randomNumber
+        {   // Генерация случайного значения от 0 до maxValue в randomNumber
             Random rand = new Random();
             randomNumber = (byte) rand.nextInt(maxValue + 1);
         }   // Освобождение памяти от ненужного в дальнейшем объекта Random
