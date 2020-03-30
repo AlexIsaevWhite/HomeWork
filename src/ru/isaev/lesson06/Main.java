@@ -11,11 +11,13 @@ public class Main {
         bank.executeFunction();
         bank.addBankomate(5);
         bank.executeFunction();
-        bank.addBankomate(5);
+        bank.addBankomate(7);
         bank.executeFunction();
         house.executeFunction();
-        System.out.println(bank.id); // id банка
-        System.out.println(house.id); // id дома
+        house.whereLiveInhabitant(1);
+        house.whereLiveInhabitant(100);
+        System.out.println("id банка " + bank.id);
+        System.out.println("id дома " + house.id);
     }
 }
 
@@ -38,14 +40,9 @@ abstract class Building {
     abstract void executeFunction();
 }
 
-/**
- * Класс жилого дома
- *
- * @author Alexander Isaev
- */
 final class House extends Building {
 
-    private int numberOfInhabitants;
+    private Inhabitant[] inhabitants;
 
     /**
      * Конструктор класса жилого дома
@@ -54,7 +51,10 @@ final class House extends Building {
      * @param numberOfInhabitants количество постояльцев
      */
     protected House(String street, int numberOfInhabitants) {
-        this.numberOfInhabitants = numberOfInhabitants;
+        inhabitants = new Inhabitant[numberOfInhabitants];
+        for (int i = 0; i < inhabitants.length; i++) {
+            inhabitants[i] = new Inhabitant(this);
+        }
         super.address = street;
         super.id = this.hashCode();
     }
@@ -66,15 +66,31 @@ final class House extends Building {
      */
     @Override
     void executeFunction() {
-        System.out.println("В здании по адресу: " + address + " начали отдыхать " + numberOfInhabitants + " постояльцев.");
+        System.out.println("В здании по адресу: " + address + " начали отдыхать " + inhabitants.length + " постояльцев.");
+    }
+
+    /**
+     * Процедура определения где живет постоялец
+     *
+     * @param numberOfInhabitant номер постояльца
+     */
+    void whereLiveInhabitant(int numberOfInhabitant) {
+        System.out.println("Житель №" + numberOfInhabitant + " живет по адресу: " + inhabitants[--numberOfInhabitant].getPlace());
     }
 }
 
-/**
- * Класс банка
- *
- * @author Alexander Isaev
- */
+class Inhabitant {
+    private House placeOfResidence;
+
+    Inhabitant(House placeOfResidence) {
+        this.placeOfResidence = placeOfResidence;
+    }
+
+    String getPlace() {
+        return placeOfResidence.address;
+    }
+}
+
 final class Bank extends Building {
 
     private int numberOfWorker;
