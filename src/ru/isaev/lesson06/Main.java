@@ -1,21 +1,23 @@
 package ru.isaev.lesson06;
 
+import java.lang.reflect.Array;
+
 public class Main {
 
     /**
      * Проверка работы классов.
      */
     public static void main(String[] args) {
-        House house = new House("ул. Советская д.100", 100);
-        Bank bank = new Bank("ул. Советская д.200", 30);
+        Building house = new House("ул. Советская д.100", 100);
+        Building bank = new Bank("ул. Советская д.200", 30);
         bank.executeFunction();
-        bank.addBankomate(5);
+        bank.executeFunction(5);
         bank.executeFunction();
-        bank.addBankomate(7);
+        bank.executeFunction(7);
         bank.executeFunction();
         house.executeFunction();
-        house.whereLiveInhabitant(1);
-        house.whereLiveInhabitant(100);
+        house.executeFunction(1);
+        house.executeFunction(100);
         System.out.println("id банка " + bank.id);
         System.out.println("id дома " + house.id);
     }
@@ -38,6 +40,15 @@ abstract class Building {
      * @see Bank#executeFunction()
      */
     abstract void executeFunction();
+
+    /**
+     * Абстрактная процедура выполнения функционала здания c принимаемыми параметрами
+     *
+     * @param number единица, которую необходимо добавить
+     * @see House#executeFunction(int)
+     * @see Bank#executeFunction(int)
+     */
+    abstract void executeFunction(int number);
 }
 
 final class House extends Building {
@@ -67,6 +78,17 @@ final class House extends Building {
     @Override
     void executeFunction() {
         System.out.println("В здании по адресу: " + address + " начали отдыхать " + inhabitants.length + " постояльцев.");
+    }
+
+    /**
+     * Процедура выполнения функций жилого дома с принимаемыми параметрами
+     *
+     * @param number единица, которую необходимо добавить
+     * @see Building#executeFunction(int)
+     */
+    @Override
+    void executeFunction(int number) {
+        whereLiveInhabitant(number);
     }
 
     /**
@@ -110,15 +132,6 @@ final class Bank extends Building {
     }
 
     /**
-     * Процедура добавления определенного количества банкоматов
-     *
-     * @param number количество добавляемых банкоматов
-     */
-    protected void addBankomate(int number) {
-        this.numberOfBankomate += number;
-    }
-
-    /**
      * Процедура выполнения функций банка
      *
      * @see Building#executeFunction()
@@ -126,5 +139,16 @@ final class Bank extends Building {
     @Override
     void executeFunction() {
         System.out.println("В банке по адресу: " + address + " начали работать " + numberOfWorker + " рабочих и " + numberOfBankomate + " банкоматов.");
+    }
+
+    /**
+     * Процедура добавления определенного количества банкоматов
+     *
+     * @param number количество добавляемых банкоматов
+     * @see Building#executeFunction(int)
+     */
+    @Override
+    protected void executeFunction(int number) {
+        this.numberOfBankomate += number;
     }
 }
