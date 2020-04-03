@@ -32,10 +32,10 @@ public class Expreriments {
         System.out.println("Создание договора и его конвертация в акт");
         Contract contract = new Contract(1, new String[]{"Чай", "Гречка", "Туалетная бумага"});
         Act act = Convector.convert(contract);
-        System.out.println("Номер: " + act.number);
-        System.out.println("Дата: " + act.date);
+        System.out.println("Номер: " + act.NUMBER);
+        System.out.println("Дата: " + act.DATE);
         System.out.println("Продукты:");
-        for (String i : act.products) {
+        for (String i : act.PRODUCTS) {
             System.out.println(i);
         }
     }
@@ -114,13 +114,13 @@ final class Contract {
 }
 
 final class Act {
-    final int number;
-    final LocalDateTime date;
-    final String[] products;
+    final int NUMBER;
+    final LocalDateTime DATE;
+    final String[] PRODUCTS;
 
     Act(int number, String[] products, LocalDateTime dateTime) {
-        this.number = number;
-        this.products = products;
-        date = dateTime;
+        this.NUMBER = number;
+        this.PRODUCTS = products;
+        DATE = dateTime;
     }
 }
