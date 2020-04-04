@@ -2,10 +2,8 @@ package ru.isaev.lesson03.task01;
 
 import java.util.Scanner;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
+public class Main {
+    public static void main(String[] args) {
         //region Входные данные
         float literOfGasoline;                  // Количество литров бензина
         float costOfALiter;                     // Cтоимость литра бензина в рублях
