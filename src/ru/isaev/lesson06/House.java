@@ -15,12 +15,12 @@ final class House extends Building {
         for (int i = 0; i < inhabitants.length; i++) {
             inhabitants[i] = new Inhabitant(this);
         }
-        super.address = street;
-        super.id = this.hashCode();
+        address = street;
+        id = this.hashCode();
     }
 
     /**
-     * Процедура выполнения функций жилого дома
+     * Вывод информации о здании в консоль
      *
      * @see Building#executeFunction()
      */
@@ -29,19 +29,13 @@ final class House extends Building {
         System.out.println("В здании по адресу: " + address + " начали отдыхать " + inhabitants.length + " постояльцев.");
     }
 
-    /**
-     * Процедура выполнения функций жилого дома с принимаемыми параметрами
-     *
-     * @param number единица, которую необходимо добавить
-     * @see Building#executeFunction(int)
-     */
     @Override
     void executeFunction(int number) {
         whereLiveInhabitant(number);
     }
 
     /**
-     * Процедура определения где живет постоялец
+     * Вывод информации где живет постоялец в консоль
      *
      * @param numberOfInhabitant номер постояльца
      */

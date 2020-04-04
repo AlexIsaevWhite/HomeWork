@@ -14,12 +14,12 @@ final class Bank extends Building {
     protected Bank(String street, int numberOfWorker) {
         this.numberOfWorker = numberOfWorker;
         numberOfBankomate = 0;
-        super.address = street;
-        super.id = this.hashCode();
+        address = street;
+        id = this.hashCode();
     }
 
     /**
-     * Процедура выполнения функций банка
+     * Вывод информации о банке в консоль
      *
      * @see Building#executeFunction()
      */
@@ -29,7 +29,7 @@ final class Bank extends Building {
     }
 
     /**
-     * Процедура добавления определенного количества банкоматов
+     * Добавление определенного количества банкоматов
      *
      * @param number количество добавляемых банкоматов
      * @see Building#executeFunction(int)
