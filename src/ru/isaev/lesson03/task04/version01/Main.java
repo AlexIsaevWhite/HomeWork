@@ -3,10 +3,8 @@ package ru.isaev.lesson03.task04.version01;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
+public class Main {
+    public static void main(String[] args) {
         //region Инициализация данных
         final byte maxValue = 100;                  // Максимально загаданное число
         final byte randomNumber;                    // Загаданное программой число, которое необходимо отгадать
@@ -25,65 +23,49 @@ public class Main
 
         //region Приветствие игрока и правила игры
         System.out.println("Добро пожаловать в игру \"горячо\", \"холодно\".");
-        System.out.println("Приложение загадало число от 0 до "+ maxValue +". Отгадайте какое число было загадано.");
+        System.out.println("Приложение загадало число от 0 до " + maxValue + ". Отгадайте какое число было загадано.");
         System.out.print("Чтобы выйти из игры введите \"exit\". Введите ваш ответ:");
         //endregion
 
         //region Логика игры
-        while (!gameOver)
-        {
+        while (!gameOver) {
             //Входные данные с консоли
             inputLine = input.next();
 
             //region Проверка введенных с консоли данных на наличие числовых значений
-            try
-            {
+            try {
                 number = Integer.parseInt(inputLine);
-            }
-            catch (NumberFormatException e)
-            {
+            } catch (NumberFormatException e) {
                 number = -1;
                 memory = 0;
             }
             //endregion
 
             //region Проверка условий игры
-            if (inputLine.equals("exit") | inputLine.equals("Exit"))
-            {
+            if (inputLine.equals("exit") | inputLine.equals("Exit")) {
                 System.out.println("Выход из игры");
                 gameOver = true;
             }
 
-            if (!gameOver)
-            {
-                if (memory == 0 & !inGame)
-                {
+            if (!gameOver) {
+                if (memory == 0 & !inGame) {
                     memory = (byte) number;
                     inGame = true;
                 }
-                if (number > memory & number < randomNumber)
-                {
+                if (number > memory & number < randomNumber) {
                     System.out.println("Горячо");
-                    gameOver = true;
-                }
-                else if (number <= memory & number < randomNumber)
-                {
+                    memory = (byte) number;
+                } else if (number <= memory & number < randomNumber) {
                     System.out.println("Холодно");
                     memory = (byte) number;
-                }
-                else if (number >= memory & number > randomNumber)
-                {
+                } else if (number >= memory & number > randomNumber) {
                     System.out.println("Холодно");
                     memory = (byte) number;
-                }
-                else if (number < memory & number > randomNumber)
-                {
+                } else if (number < memory & number > randomNumber) {
                     System.out.println("Горячо");
-                    gameOver = true;
-                }
-                else if (number == randomNumber)
-                {
-                    System.out.println("Горячо");
+                    memory = (byte) number;
+                } else if (number == randomNumber) {
+                    System.out.println("Вы выйграли");
                     gameOver = true;
                 }
             }
