@@ -15,13 +15,14 @@ public class Main {
         System.out.print("Пожалуйста, введите число: ");
 
         //region Основной алгоритм
-        number = InputFromConsole();
-        WhatIsIt(number);
+        number = inputFromConsole();
+        whatIsIt(number);
         //endregion
     }
 
+
     // Прием чисел с консоли
-    private static int InputFromConsole() {
+    private static int inputFromConsole() {
         //region Данные метода
         String inputLine;                           // Данные введенные с консоли
         //endregion
@@ -37,7 +38,7 @@ public class Main {
     }
 
     // Определение введенного числа
-    private static void WhatIsIt(int number) {
+    private static void whatIsIt(int number) {
         if (number == 0) {
             System.out.println("Введенное число равно нулю");
         } else if (number > 0) {

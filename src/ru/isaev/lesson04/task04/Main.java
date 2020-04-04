@@ -19,12 +19,12 @@ public class Main {
 
         //region Основной алгоритм
         while (true) {
-            number = InputFromConsole();
+            number = inputFromConsole();
             if (number == 1) {
-                ArifCalculate();
+                arifCalculate();
                 break;
             } else if (number == 2) {
-                GeomCalculate();
+                geomCalculate();
                 break;
             } else {
                 System.out.println("Пожалуйста, выберите из доступных варантов");
@@ -34,7 +34,7 @@ public class Main {
     }
 
     // Прием чисел с консоли
-    private static double InputFromConsole() {
+    private static double inputFromConsole() {
         //region Данные метода
         String inputLine;                           // Данные введенные с консоли
         //endregion
@@ -50,40 +50,40 @@ public class Main {
     }
 
     // Работа с арифметическим расчетом
-    private static void ArifCalculate() {
-        InterData();
+    private static void arifCalculate() {
+        interData();
         for (int i = 0; i < cycles; i++) {
             System.out.println(x0);
-            x0 = ArifProgression(x0, x1);
+            x0 = arifProgression(x0, x1);
         }
     }
 
     // Работа с геометрическим расчетом
-    private static void GeomCalculate() {
-        InterData();
+    private static void geomCalculate() {
+        interData();
         for (int i = 0; i < cycles; i++) {
             System.out.println(x0);
-            x0 = GeomProgression(x0, x1);
+            x0 = geomProgression(x0, x1);
         }
     }
 
     // Ввод данных для расчета
-    private static void InterData() {
+    private static void interData() {
         System.out.println("Введите число, которое хотите просчитать:");
-        x0 = InputFromConsole();
+        x0 = inputFromConsole();
         System.out.println("Введите число, с помощью которого хотите осуществить прогрессию:");
-        x1 = InputFromConsole();
+        x1 = inputFromConsole();
         System.out.println("Введите сколько раз надо осуществить прогрессию:");
-        cycles = InputFromConsole();
+        cycles = inputFromConsole();
     }
 
     // Арифметическая прогрессия
-    private static double ArifProgression(double x, double q) {
+    private static double arifProgression(double x, double q) {
         return x + q;
     }
 
     // Геометрическая прогрессия
-    private static double GeomProgression(double x, double q) {
+    private static double geomProgression(double x, double q) {
         return x * q;
     }
 }

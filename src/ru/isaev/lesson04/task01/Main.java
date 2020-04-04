@@ -7,25 +7,26 @@ public class Main {
 
     public static void main(String[] args) {
         //region Инициализация данных метода
-        final byte numbers = 2;                     // Сколько всего будет на прием чисел
-        int[] arrNumbers = new int[numbers];        // Инициализация переменной входных значений с консоли
+        final byte NUMBERS = 2;                     // Сколько всего будет на прием чисел
+        int[] arrNumbers = new int[NUMBERS];        // Инициализация переменной входных значений с консоли
         //endregion
 
         //Приветствие
-        System.out.println("Добро пожаловать в программу нахождения минимального из " + numbers + " чисел");
+        System.out.println("Добро пожаловать в программу нахождения минимального из " + NUMBERS + " чисел");
 
         //region Основной алгоритм
-        for (int i = 0; i < numbers; i++) {
+        for (int i = 0; i < NUMBERS; i++) {
             int num = i + 1;
             System.out.println("Введите " + num + " число: ");
-            InputFromConsole(arrNumbers, i);
+            inputFromConsole(arrNumbers, i);
         }
-        System.out.println("Самое наименьшее число: " + MinimalNumber(arrNumbers));
+        System.out.println("Самое наименьшее число: " + minimalNumber(arrNumbers));
         //endregion
     }
 
+
     // Прием чисел с консоли
-    private static void InputFromConsole(int[] arrNumbers, int i) {
+    private static void inputFromConsole(int[] arrNumbers, int i) {
         //region Данные метода
         String inputLine;                           // Данные введенные с консоли
         boolean allDone = false;                    // Контроль окончания ввода чисел
@@ -43,7 +44,7 @@ public class Main {
     }
 
     // Алгоритм нахождения минимального числа
-    private static int MinimalNumber(int[] numbers) {
+    private static int minimalNumber(int[] numbers) {
         int num = numbers[0];
         for (int i : numbers) {
             num = Math.min(i, num);
