@@ -2,10 +2,8 @@ package ru.isaev.lesson03.task02;
 
 import java.util.Scanner;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
+public class Main {
+    public static void main(String[] args) {
         //region Входные данные
         float salary; // Заработная плата без учёта НДФЛ
         float personalIncomeTax; // НДФЛ
@@ -14,7 +12,7 @@ public class Main
 
         //region Общение с пользователем
         System.out.println("Пожалуйста, введите сколько сейчас процентов НДФЛ, %:");
-        personalIncomeTax = input.nextFloat()/100;
+        personalIncomeTax = input.nextFloat() / 100;
 
         System.out.println("Пожалуйста, введите свою заработную плату в рублях:");
         salary = input.nextFloat();
