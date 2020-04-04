@@ -2,10 +2,8 @@ package ru.isaev.lesson03.task03;
 
 import java.util.Scanner;
 
-public class Main
-{
-    public static void main(String[] args)
-    {
+public class Main {
+    public static void main(String[] args) {
         //region Входные данные
         int seconds; // Количество секунд
         final byte secondsInMinute = 60; // Количество секунд в минуте
