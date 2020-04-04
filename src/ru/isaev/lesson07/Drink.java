@@ -1,6 +1,6 @@
 package ru.isaev.lesson07;
 
-enum MachineMenu {
+enum Drink {
     MILK("Молоко", 20),
     COFFE("Кофе", 50),
     TEA("Чай", 20),
@@ -8,11 +8,11 @@ enum MachineMenu {
     GREEN_LUMINOUS_SLURRY("Зелёная светящиеся жижа", 200);
 
     private String name;
-    private int count;
+    private int price;
 
-    MachineMenu(String name, int count) {
+    Drink(String name, int price) {
         this.name = name;
-        this.count = count;
+        this.price = price;
     }
 
     public String getName() {
@@ -20,6 +20,6 @@ enum MachineMenu {
     }
 
     int getCount() {
-        return count;
+        return price;
     }
 }
