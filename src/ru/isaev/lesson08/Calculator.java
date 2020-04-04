@@ -33,7 +33,7 @@ final class Calculator {
         return number1 / number2;
     }
 
-    static double percentageOfNumber(double number1) {
-        return number1 * 100;
+    static double percentageOfNumber(int number1, double number2) {
+        return number1 * number2;
     }
 }

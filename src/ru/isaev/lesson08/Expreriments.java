@@ -20,19 +20,19 @@ public class Expreriments {
         System.out.println(Calculator.division(5, 2));
         System.out.println(Calculator.division(5.0, 2.0));
         System.out.println("Процент от числа");
-        System.out.println(Calculator.percentageOfNumber(0.55));
+        System.out.println(Calculator.percentageOfNumber(5, 0.55));
         System.out.println("Создание объектов");
-        Objects object1 = new Objects();
+        new Objects();
         System.out.println("Всего реализовано " + Objects.getNubersOfObjects() + " объектов.");
-        Objects object2 = new Objects();
+        new Objects();
         System.out.println("Всего реализовано " + Objects.getNubersOfObjects() + " объектов.");
         System.out.println("Создание договора и его конвертация в акт");
         Contract contract = new Contract(1, new String[]{"Чай", "Гречка", "Туалетная бумага"});
         Act act = Convector.convert(contract);
-        System.out.println("Номер: " + act.NUMBER);
-        System.out.println("Дата: " + act.DATE);
+        System.out.println("Номер: " + act.getNUMBER());
+        System.out.println("Дата: " + act.getDATE());
         System.out.println("Продукты:");
-        for (String i : act.PRODUCTS) {
+        for (String i : act.getPRODUCTS()) {
             System.out.println(i);
         }
     }
