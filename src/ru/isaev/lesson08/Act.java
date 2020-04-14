@@ -3,25 +3,25 @@ package ru.isaev.lesson08;
 import java.time.LocalDateTime;
 
 final class Act {
-    final private int NUMBER;
-    final private LocalDateTime DATE;
-    final private String[] PRODUCTS;
+    final private int number;
+    final private LocalDateTime date;
+    final private String[] products;
 
     Act(int number, String[] products, LocalDateTime dateTime) {
-        this.NUMBER = number;
-        this.PRODUCTS = products;
-        DATE = dateTime;
+        this.number = number;
+        this.products = products;
+        date = dateTime;
     }
 
-    int getNUMBER() {
-        return NUMBER;
+    int getNumber() {
+        return number;
     }
 
-    LocalDateTime getDATE() {
-        return DATE;
+    LocalDateTime getDate() {
+        return date;
     }
 
-    String[] getPRODUCTS() {
-        return PRODUCTS;
+    String[] getProducts() {
+        return products;
     }
 }

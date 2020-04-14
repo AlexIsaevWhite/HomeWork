@@ -29,10 +29,10 @@ public class Expreriments {
         System.out.println("Создание договора и его конвертация в акт");
         Contract contract = new Contract(1, new String[]{"Чай", "Гречка", "Туалетная бумага"});
         Act act = Convector.convert(contract);
-        System.out.println("Номер: " + act.getNUMBER());
-        System.out.println("Дата: " + act.getDATE());
+        System.out.println("Номер: " + act.getNumber());
+        System.out.println("Дата: " + act.getDate());
         System.out.println("Продукты:");
-        for (String i : act.getPRODUCTS()) {
+        for (String i : act.getProducts()) {
             System.out.println(i);
         }
     }
