@@ -4,32 +4,30 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    final static byte MAX_VALUE = 100;
-    final static Scanner INPUT = new Scanner(System.in);
+    final static int MAX_VALUE = 100;
 
     public static void main(String[] args) {
-        final byte randomNumber;                    // Загаданное программой число, которое необходимо отгадать
-        byte lastInputNumber = 0;                   // Последнее введеное число игроком
-        String inputLine;                           // Инициализация переменной входных значений с консоли
-        byte number;
+        final Scanner scanner = new Scanner(System.in);
+        final int randomNumber;
+        int lastInputNumber = 0;
+        String inputLine;
+        int number;
 
         {
             Random rand = new Random();
-            randomNumber = (byte) rand.nextInt(MAX_VALUE + 1);
+            randomNumber = rand.nextInt(MAX_VALUE + 1);
         }
 
-        //region Приветствие игрока и правила игры
         System.out.println("Добро пожаловать в игру \"горячо\", \"холодно\".");
         System.out.println("Приложение загадало число от 0 до " + MAX_VALUE + ". Отгадайте какое число было загадано.");
         System.out.print("Чтобы выйти из игры введите \"exit\". Введите ваш ответ:");
-        //endregion
 
         while (true) {
-            inputLine = INPUT.next();
+            inputLine = scanner.next();
 
             try {
                 if (Integer.parseInt(inputLine) >= 0) {
-                    number = (byte) Integer.parseInt(inputLine);
+                    number = Integer.parseInt(inputLine);
                     if (number == lastInputNumber)
                         System.out.println("Вы уже вводили это число.");
                 } else {
