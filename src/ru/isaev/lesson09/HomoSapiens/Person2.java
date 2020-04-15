@@ -6,12 +6,12 @@ public final class Person2 extends Human {
     }
 
     @Override
-    public void running() {
+    public void run() {
         System.out.printf("%s побежал на работу. \n", getName());
     }
 
     @Override
-    public void swimming() {
+    public void swim() {
         System.out.printf("%s поплыл на работу. \n", getName());
     }
 }

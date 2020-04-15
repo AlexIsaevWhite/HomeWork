@@ -1,8 +1,8 @@
 package ru.isaev.lesson09;
 
-import ru.isaev.lesson09.Actions.Fly;
-import ru.isaev.lesson09.Actions.Run;
-import ru.isaev.lesson09.Actions.Swim;
+import ru.isaev.lesson09.Actions.Flying;
+import ru.isaev.lesson09.Actions.Running;
+import ru.isaev.lesson09.Actions.Swimming;
 import ru.isaev.lesson09.Animals.Animal;
 import ru.isaev.lesson09.Animals.Cat;
 import ru.isaev.lesson09.Animals.Dog;
@@ -21,18 +21,18 @@ public class Main {
         System.out.printf("Это: %s \n", cat.getName());
         System.out.printf("Это: %s \n", falcon.getName());
 
-        ((Run) cat).running();
-        ((Run) dog).running();
-        ((Swim) dog).swimming();
-        ((Fly) falcon).flying();
+        ((Running) cat).run();
+        ((Running) dog).run();
+        ((Swimming) dog).swim();
+        ((Flying) falcon).fly();
 
         Human jack = new Person1("Джек");
         Human vasya = new Person2("Вася");
 
-        jack.running();
-        vasya.running();
-        jack.swimming();
-        vasya.swimming();
+        jack.run();
+        vasya.run();
+        jack.swim();
+        vasya.swim();
     }
 }
 

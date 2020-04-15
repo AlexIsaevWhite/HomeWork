@@ -1,17 +1,17 @@
 package ru.isaev.lesson09.Animals;
 
-import ru.isaev.lesson09.Actions.Fly;
+import ru.isaev.lesson09.Actions.Flying;
 
-public final class Falcon extends Animal implements Fly {
-    final String NAME = "Сокол";
+public final class Falcon extends Animal implements Flying {
+    private String name = "Сокол";
 
     @Override
     public String getName() {
-        return NAME;
+        return name;
     }
 
     @Override
-    public void flying() {
-        System.out.printf("%s полетел. \n", NAME);
+    public void fly() {
+        System.out.printf("%s полетел. \n", name);
     }
 }

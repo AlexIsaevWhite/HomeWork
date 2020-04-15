@@ -1,17 +1,17 @@
 package ru.isaev.lesson09.Animals;
 
-import ru.isaev.lesson09.Actions.Run;
+import ru.isaev.lesson09.Actions.Running;
 
-public final class Cat extends Animal implements Run {
-    final String NAME = "Кот";
+public final class Cat extends Animal implements Running {
+    private String name = "Кот";
 
     @Override
     public String getName() {
-        return NAME;
+        return name;
     }
 
     @Override
-    public void running() {
-        System.out.printf("%s побежал. \n", NAME);
+    public void run() {
+        System.out.printf("%s побежал. \n", name);
     }
 }
