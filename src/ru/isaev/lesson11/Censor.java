@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Censor {
     static final String[] BAD_WORDS = {"бяка", "Бяка", "бякой", "Бякой", "бяку", "Бяку"};
     static final String CENSURE = "<вырезано цензурой>";
-    static Scanner input = new Scanner(System.in);
-    static String out;
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String out;
         System.out.println("Введите предложение:");
-        out = censor(input.nextLine());
+        out = censor(scanner.nextLine());
         System.out.println(out);
     }
 
