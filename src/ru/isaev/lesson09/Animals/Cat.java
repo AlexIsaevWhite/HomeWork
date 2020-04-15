@@ -1,10 +1,12 @@
-package ru.isaev.lesson09;
+package ru.isaev.lesson09.Animals;
 
-final class Cat extends Animal implements Run {
+import ru.isaev.lesson09.Actions.Run;
+
+public final class Cat extends Animal implements Run {
     final String NAME = "Кот";
 
     @Override
-    String getName() {
+    public String getName() {
         return NAME;
     }
 

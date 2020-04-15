@@ -1,7 +1,7 @@
-package ru.isaev.lesson09;
+package ru.isaev.lesson09.HomoSapiens;
 
-final class Person1 extends Human {
-    Person1(String name) {
+public final class Person1 extends Human {
+    public Person1(String name) {
         super(name);
     }
 

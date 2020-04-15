@@ -1,5 +1,16 @@
 package ru.isaev.lesson09;
 
+import ru.isaev.lesson09.Actions.Fly;
+import ru.isaev.lesson09.Actions.Run;
+import ru.isaev.lesson09.Actions.Swim;
+import ru.isaev.lesson09.Animals.Animal;
+import ru.isaev.lesson09.Animals.Cat;
+import ru.isaev.lesson09.Animals.Dog;
+import ru.isaev.lesson09.Animals.Falcon;
+import ru.isaev.lesson09.HomoSapiens.Human;
+import ru.isaev.lesson09.HomoSapiens.Person1;
+import ru.isaev.lesson09.HomoSapiens.Person2;
+
 public class Main {
     public static void main(String[] args) {
         Animal dog = new Dog();

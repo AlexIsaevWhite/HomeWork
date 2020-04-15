@@ -1,10 +1,12 @@
-package ru.isaev.lesson09;
+package ru.isaev.lesson09.Animals;
 
-final class Falcon extends Animal implements Fly {
+import ru.isaev.lesson09.Actions.Fly;
+
+public final class Falcon extends Animal implements Fly {
     final String NAME = "Сокол";
 
     @Override
-    String getName() {
+    public String getName() {
         return NAME;
     }
 
