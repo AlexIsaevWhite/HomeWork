@@ -1,8 +1,8 @@
 package ru.isaev.lesson09.Animals;
 
-import ru.isaev.lesson09.Actions.Running;
+import ru.isaev.lesson09.Actions.Runnable;
 
-public final class Cat extends Animal implements Running {
+public final class Cat extends Animal implements Runnable {
     private String name = "Кот";
 
     @Override

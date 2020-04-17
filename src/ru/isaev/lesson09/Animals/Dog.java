@@ -1,9 +1,9 @@
 package ru.isaev.lesson09.Animals;
 
-import ru.isaev.lesson09.Actions.Running;
-import ru.isaev.lesson09.Actions.Swimming;
+import ru.isaev.lesson09.Actions.Runnable;
+import ru.isaev.lesson09.Actions.Swimmable;
 
-public final class Dog extends Animal implements Running, Swimming {
+public final class Dog extends Animal implements Runnable, Swimmable {
     private String name = "Собака";
 
     @Override

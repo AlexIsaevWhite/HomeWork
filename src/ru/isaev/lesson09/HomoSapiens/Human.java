@@ -1,9 +1,9 @@
 package ru.isaev.lesson09.HomoSapiens;
 
-import ru.isaev.lesson09.Actions.Running;
-import ru.isaev.lesson09.Actions.Swimming;
+import ru.isaev.lesson09.Actions.Runnable;
+import ru.isaev.lesson09.Actions.Swimmable;
 
-public abstract class Human implements Running, Swimming {
+public abstract class Human implements Runnable, Swimmable {
     private String name;
 
     Human(String name) {

@@ -1,5 +1,5 @@
 package ru.isaev.lesson09.Actions;
 
-public interface Swimming {
+public interface Swimmable {
     void swim();
 }

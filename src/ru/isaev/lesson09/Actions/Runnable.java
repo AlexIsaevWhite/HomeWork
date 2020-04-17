@@ -1,5 +1,5 @@
 package ru.isaev.lesson09.Actions;
 
-public interface Running {
+public interface Runnable {
     void run();
 }

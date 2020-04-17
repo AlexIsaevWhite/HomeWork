@@ -1,5 +1,5 @@
 package ru.isaev.lesson09.Actions;
 
-public interface Flying {
+public interface Flyable {
     void fly();
 }
