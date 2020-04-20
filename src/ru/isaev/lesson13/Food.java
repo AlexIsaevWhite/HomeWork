@@ -2,7 +2,7 @@ package ru.isaev.lesson13;
 
 enum Food {
     APPLE("яблоко"),
-    CARRIOT("морковь"),
+    CARROT("морковь"),
     FISH("рыбу"),
     PORRIDGE("кашу");
 

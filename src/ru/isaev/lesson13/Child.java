@@ -14,12 +14,12 @@ class Child {
         for (Food f : lovelyFood) {
             if (f == food) {
                 noneLovelyFood = false;
-                System.out.printf("Cъел %s за обе щеки. \n", f.getName());
+                System.out.printf("Съел %s за обе щеки. \n", f.getName());
                 break;
             }
         }
         if (noneLovelyFood)
-            throw new IOException("Не съел " + food.getName() + "." + "\nГоворит: Cпасибо, Мама.");
-        System.out.println("Говорит: Cпасибо, Мама.");
+            throw new IOException("Не съел " + food.getName() + "." + "\nГоворит: Спасибо, Мама.");
+        System.out.println("Говорит: Спасибо, Мама.");
     }
 }
