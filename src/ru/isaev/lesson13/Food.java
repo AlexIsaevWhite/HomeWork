@@ -8,11 +8,11 @@ enum Food {
 
     private String name;
 
-    public String getName() {
-        return name;
-    }
-
     Food(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

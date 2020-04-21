@@ -1,25 +1,22 @@
 package ru.isaev.lesson13;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 class Child {
-    private Food[] lovelyFood;
+    private ArrayList<Food> lovelyFood;
 
     public Child(Food[] lovelyFood) {
-        this.lovelyFood = lovelyFood;
+        this.lovelyFood = new ArrayList<>(Arrays.asList(lovelyFood));
     }
 
     void eat(Food food) throws IOException {
-        boolean noneLovelyFood = true;
-        for (Food f : lovelyFood) {
-            if (f == food) {
-                noneLovelyFood = false;
-                System.out.printf("Съел %s за обе щеки. \n", f.getName());
-                break;
-            }
-        }
-        if (noneLovelyFood)
-            throw new IOException("Не съел " + food.getName() + "." + "\nГоворит: Спасибо, Мама.");
-        System.out.println("Говорит: Спасибо, Мама.");
+        String thanksMom = "Говорит: Спасибо, Мама.";
+
+        if (lovelyFood.contains(food))
+            System.out.printf("Съел %s за обе щеки. %s%s%s", food.getName(), System.lineSeparator(), thanksMom, System.lineSeparator());
+        else
+            throw new IOException("Не съел " + food.getName() + "." + System.lineSeparator() + thanksMom);
     }
 }
