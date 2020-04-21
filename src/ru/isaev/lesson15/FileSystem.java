@@ -23,8 +23,7 @@ public class FileSystem {
             createDir(dir2);
             createFile(newFile1);
             writeFileFromObject(new MyObjectForFile(), newFile1);
-        }
-        if (dirIsExist && firstFileIsExist) {
+        } else {
             copy(newFile1, duplicateFile);
             rename(duplicateFile, renamedFile);
             copy(newFile1, duplicateFile);
