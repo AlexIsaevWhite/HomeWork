@@ -4,9 +4,9 @@ import java.io.*;
 import java.nio.file.Files;
 
 public class FileSystem {
-    final static String SEPARATOR = File.separator + File.separator;
-    static boolean dirIsExist;
-    static boolean firstFileIsExist;
+    final private static String SEPARATOR = File.separator + File.separator;
+    private static boolean dirIsExist;
+    private static boolean firstFileIsExist;
 
     public static void main(String[] args) {
         File dir = new File("out" + SEPARATOR + "production" + SEPARATOR + "HomeWork" + SEPARATOR + "ru" + SEPARATOR + "isaev" + SEPARATOR + "lesson15" + SEPARATOR + "test");
