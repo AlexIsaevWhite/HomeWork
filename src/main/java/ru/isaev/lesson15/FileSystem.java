@@ -9,7 +9,7 @@ public class FileSystem {
     private static boolean firstFileIsExist;
 
     public static void main(String[] args) {
-        File dir = new File("out" + SEPARATOR + "production" + SEPARATOR + "HomeWork" + SEPARATOR + "ru" + SEPARATOR + "isaev" + SEPARATOR + "lesson15" + SEPARATOR + "test");
+        File dir = new File("target" + SEPARATOR + "classes" + SEPARATOR + "ru" + SEPARATOR + "isaev" + SEPARATOR + "lesson15" + SEPARATOR + "test");
         File dir2 = new File(dir, "new");
         File newFile1 = new File(dir, "MyObject.obj");
         File newFile2 = new File(dir2, "MyObject2.obj");
