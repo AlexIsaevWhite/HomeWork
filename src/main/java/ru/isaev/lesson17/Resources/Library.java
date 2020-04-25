@@ -32,7 +32,7 @@ public class Library implements Serializable {
      *
      * @param file файл, из которого будет осуществлено чтение
      */
-    public void readFromFile(File file) {
+    public void readFromFile(File file) throws IOException {
         try (BufferedInputStream bos = new BufferedInputStream(new FileInputStream(file));
              ObjectInputStream oos = new ObjectInputStream(Base64.getDecoder().wrap(bos))) {
             Books = (ArrayList<Book>) oos.readObject();
@@ -41,7 +41,8 @@ public class Library implements Serializable {
         } catch (ClassNotFoundException e) {
             System.err.println("Неверный формат файла.");
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Файл поврежден.");
+            throw e;
         }
     }
 

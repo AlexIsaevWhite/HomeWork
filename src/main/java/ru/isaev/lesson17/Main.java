@@ -3,6 +3,7 @@ package ru.isaev.lesson17;
 import ru.isaev.lesson17.Resources.Library;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Main {
     final private String SEPARATOR = File.separator + File.separator;
@@ -23,12 +24,20 @@ public class Main {
     private void initialization() {
         myLabrary = new Library();
         if (DEFAULT_DESTANATION.exists())
-            myLabrary.readFromFile(DEFAULT_DESTANATION);
+            try {
+                myLabrary.readFromFile(DEFAULT_DESTANATION);
+            } catch (IOException e) {
+                createLibrary();
+            }
         else {
-            System.out.println("Создается архив.");
-            addBooksInLabrary();
-            myLabrary.writeToFile(DEFAULT_DESTANATION);
+            createLibrary();
         }
+    }
+
+    private void createLibrary() {
+        System.out.println("Создается архив.");
+        addBooksInLabrary();
+        myLabrary.writeToFile(DEFAULT_DESTANATION);
     }
 
     private void viewLibrary() {
