@@ -16,7 +16,7 @@ public class Main {
 
     void startWork() {
         initialization();
-        myLabrary.viewBooks();
+        viewLibrary();
         deleteBooks();
     }
 
@@ -29,6 +29,11 @@ public class Main {
             addBooksInLabrary();
             myLabrary.writeToFile(DEFAULT_DESTANATION);
         }
+    }
+
+    private void viewLibrary() {
+        System.out.println("Осмотр содержимого архива:");
+        myLabrary.viewBooks();
     }
 
     private void addBooksInLabrary() {
