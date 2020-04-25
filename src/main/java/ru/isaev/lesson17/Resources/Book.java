@@ -5,12 +5,26 @@ import java.io.Serializable;
 class Book implements Serializable {
     private String name;
     private String author;
-    private int yearOfPublishing;
+    private String yearOfPublishing;
 
-    Book(String name, String author, int yearOfPublishing) {
+    Book() {
+    }
+
+    Book(String name, String author, String yearOfPublishing) {
         this.name = name;
         this.author = author;
         this.yearOfPublishing = yearOfPublishing;
+    }
+
+    /**
+     * Передает информацию о книге в текстовом варианте
+     *
+     * @return Название, автор и год издания
+     */
+    @Override
+    public String toString() {
+        return " Название: " + name + System.lineSeparator() + " Автор: " + author + System.lineSeparator()
+                + " Год издания: " + yearOfPublishing;
     }
 
     String getName() {
@@ -21,7 +35,7 @@ class Book implements Serializable {
         return author;
     }
 
-    int getYearOfPublishing() {
+    String getYearOfPublishing() {
         return yearOfPublishing;
     }
 }
