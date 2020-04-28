@@ -1,54 +1,57 @@
 package ru.isaev.lesson15;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 
 public class FileSystem {
     final private static String SEPARATOR = File.separator + File.separator;
-    private static boolean dirIsExist;
-    private static boolean firstFileIsExist;
 
     public static void main(String[] args) {
-        File dir = new File("target" + SEPARATOR + "classes" + SEPARATOR + "ru" + SEPARATOR + "isaev" + SEPARATOR + "lesson15" + SEPARATOR + "test");
+        new FileSystem().startWork();
+    }
+
+    void startWork() {
+        File dir = new File("target" + SEPARATOR + "classes" + SEPARATOR + "ru" + SEPARATOR + "isaev"
+                + SEPARATOR + "lesson15" + SEPARATOR + "test");
         File dir2 = new File(dir, "new");
         File newFile1 = new File(dir, "MyObject.obj");
         File newFile2 = new File(dir2, "MyObject2.obj");
         File renamedFile = new File(dir, "RenamedMyObject.obj");
         File duplicateFile = new File(dir, "DuplicateMyObject.obj");
-        dirIsExist = Files.exists(dir.toPath());
-        firstFileIsExist = Files.exists(newFile1.toPath());
 
-        if (!dirIsExist && !firstFileIsExist) {
-            createDir(dir);
-            createDir(dir2);
-            createFile(newFile1);
-            writeFileFromObject(new MyObjectForFile(), newFile1);
-        }
-        if (dirIsExist && firstFileIsExist) {
+        if (createDir(dir2) && createFile(newFile1)) {
             copy(newFile1, duplicateFile);
             rename(duplicateFile, renamedFile);
             copy(newFile1, duplicateFile);
             delete(newFile1);
             createFile(newFile2);
         }
-        recursion(dir);
+        recursion(dir, "");
     }
 
-    static void createFile(File newFile) {
+    private boolean createFile(File newFile) {
         try {
-            firstFileIsExist = newFile.createNewFile();
-            System.out.println("Файл " + newFile.getName() + " создан.");
+            if (newFile.createNewFile()) {
+                System.out.println("Файл " + newFile.getName() + " создан.");
+                return true;
+            } else
+                return false;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
-    static void createDir(File dir) {
-        dirIsExist = dir.mkdir();
-        System.out.println("Директория " + dir.getAbsolutePath() + " создана");
+    private boolean createDir(File dir) {
+        if (dir.mkdirs()) {
+            System.out.println("Директория " + dir.getAbsolutePath() + " создана");
+            return true;
+        } else
+            return false;
     }
 
-    static void copy(File file, File duplicate) {
+    private void copy(File file, File duplicate) {
         try {
             Files.copy(file.toPath(), duplicate.toPath());
             System.out.println("Файл " + file.getName() + " скопирован в " + duplicate.getParent());
@@ -57,12 +60,12 @@ public class FileSystem {
         }
     }
 
-    static void rename(File file, File renamedFile) {
+    private void rename(File file, File renamedFile) {
         if (file.renameTo(renamedFile))
             System.out.println("Файл " + file.getName() + " переименован в " + renamedFile.getName());
     }
 
-    static void delete(File file) {
+    private void delete(File file) {
         try {
             Files.delete(file.toPath());
             System.out.println("Файл " + file.getName() + " удален.");
@@ -71,45 +74,19 @@ public class FileSystem {
         }
     }
 
-    static void showWhatInsideMyObject(File file) {
-        MyObjectForFile fromFile = (MyObjectForFile) readFromFile(file);
-        if (fromFile != null) {
-            System.out.println("Содержимое файла " + file.getName() + ":");
-            System.out.println("int: " + fromFile.A);
-            System.out.println("String: " + fromFile.B);
-            for (char c : fromFile.C)
-                System.out.println("char[]: " + c);
-        }
-    }
-
-    static Object readFromFile(File file) {
-        Object readFromFile = null;
-        try (ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
-            readFromFile = objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Неверное содержимое файла " + file.getName());
-        }
-        return readFromFile;
-    }
-
-    static void writeFileFromObject(Object object, File file) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
-            oos.writeObject(object);
-            System.out.println("Файл " + file.getName() + " заполнен.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    static void recursion(File dir) {
+    private void recursion(File dir, String depth) {
         if (dir.exists()) {
             File[] files = dir.listFiles();
-            assert files != null;
-            for (File file : files) {
-                if (file.isFile())
-                    showWhatInsideMyObject(file);
-                else
-                    recursion(file);
+            String path = depth + File.separator + dir.getName() + File.separator;
+            depth = new String(new char[path.length()]);
+            if (files != null) {
+                for (File file : files) {
+                    if (file.isFile()) {
+                        System.out.println(path);
+                        System.out.println(depth + file.getName());
+                    } else
+                        recursion(file, depth);
+                }
             }
         }
     }
