@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 
 public class Library implements Serializable {
-    private ArrayList<Book> Books;
-
-    public Library() {
-        Books = new ArrayList<>();
-    }
+    private ArrayList<Book> books = new ArrayList<>();
 
     /**
      * Метод записывающий закодированные данные класса через буфер в файл
@@ -19,7 +15,10 @@ public class Library implements Serializable {
     public void writeToFile(File file) {
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
              ObjectOutputStream oos = new ObjectOutputStream(Base64.getEncoder().wrap(bos))) {
-            oos.writeObject(Books);
+            for (Book book : books) {
+                oos.writeByte(0);
+                oos.writeObject(book);
+            }
         } catch (FileNotFoundException e) {
             System.err.println("Неверно указан путь к файлу.");
         } catch (IOException e) {
@@ -35,7 +34,14 @@ public class Library implements Serializable {
     public void readFromFile(File file) throws IOException {
         try (BufferedInputStream bos = new BufferedInputStream(new FileInputStream(file));
              ObjectInputStream oos = new ObjectInputStream(Base64.getDecoder().wrap(bos))) {
-            Books = (ArrayList<Book>) oos.readObject();
+            while (oos.available() > 0) {
+                oos.readByte();
+                Object readObject = oos.readObject();
+                if (readObject instanceof Book)
+                    books.add((Book) readObject);
+                else
+                    throw new ClassNotFoundException();
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Библиотека не найдена.");
         } catch (ClassNotFoundException e) {
@@ -54,16 +60,11 @@ public class Library implements Serializable {
      * @param year   год издания
      */
     public void addBook(String name, String author, String year) {
-        boolean bookExist = false;
-        for (Book book : Books) {
-            if (thisBookExist(book, name, author, year)) {
-                System.out.println("Такая книга уже существует.");
-                bookExist = true;
-                break;
-            }
-        }
-        if (!bookExist)
-            Books.add(new Book(name, author, year));
+        Book newBook = new Book(name, author, year);
+        if (books.contains(newBook))
+            System.out.println("Такая книга уже существует.");
+        else
+            books.add(newBook);
     }
 
     /**
@@ -75,9 +76,12 @@ public class Library implements Serializable {
      */
     public void deleteBook(String name, String author, String year) {
         System.out.println("Удаление книги: " + name + ", авторства: " + author);
-        if (Books != null)
-            if (!Books.remove(forRemoveBook(name, author, year)))
+        if (books != null) {
+            if (!books.remove(new Book(name, author, year)))
                 System.out.println("Такой книги нет в архиве.");
+        } else
+            System.out.println("Архив уже пуст.");
+
     }
 
     /**
@@ -85,25 +89,10 @@ public class Library implements Serializable {
      */
     public void viewBooks() {
         int num = 1;
-        for (Book book : Books) {
+        for (Book book : books) {
             System.out.printf("%s.%s%s%s%s", num, System.lineSeparator(), book, System.lineSeparator(), System.lineSeparator());
             num++;
         }
-    }
-
-    private boolean thisBookExist(Book book, String name, String author, String year) {
-        return book.getName().equals(name) && book.getAuthor().equals(author) && book.getYearOfPublishing().equals(year);
-    }
-
-    private Book forRemoveBook(String name, String author, String year) {
-        Book thisBook = new Book();
-        for (Book book : Books) {
-            if (thisBookExist(book, name, author, year)) {
-                thisBook = book;
-                break;
-            }
-        }
-        return thisBook;
     }
 }
 

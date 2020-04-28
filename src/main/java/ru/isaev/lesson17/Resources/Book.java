@@ -1,19 +1,29 @@
 package ru.isaev.lesson17.Resources;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 class Book implements Serializable {
     private String name;
     private String author;
     private String yearOfPublishing;
 
-    Book() {
-    }
-
     Book(String name, String author, String yearOfPublishing) {
         this.name = name;
         this.author = author;
         this.yearOfPublishing = yearOfPublishing;
+    }
+
+    String getName() {
+        return name;
+    }
+
+    String getAuthor() {
+        return author;
+    }
+
+    String getYearOfPublishing() {
+        return yearOfPublishing;
     }
 
     /**
@@ -27,15 +37,25 @@ class Book implements Serializable {
                 + " Год издания: " + yearOfPublishing;
     }
 
-    String getName() {
-        return name;
+    /**
+     * Сравнивает содержимое объектов
+     *
+     * @param obj объект сравнения
+     * @return являются ли сравниваемые объекты идентичными
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj instanceof Book) {
+            Book book = (Book) obj;
+            return name.equals(book.name)
+                    && author.equals(book.author)
+                    && yearOfPublishing.equals(book.yearOfPublishing);
+        } else return false;
     }
 
-    String getAuthor() {
-        return author;
-    }
-
-    String getYearOfPublishing() {
-        return yearOfPublishing;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, author, yearOfPublishing);
     }
 }
