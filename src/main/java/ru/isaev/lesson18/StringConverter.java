@@ -19,7 +19,7 @@ public class StringConverter {
     }
 
     public static void main(String[] args) {
-        StringConverter converter = new StringConverter(StandardCharsets.UTF_8, StandardCharsets.UTF_16);
+        StringConverter converter = new StringConverter(StandardCharsets.UTF_8, StandardCharsets.US_ASCII);
         converter.startWork(converter.INPUT_FILE, converter.OUTPUT_FILE);
     }
 
@@ -49,11 +49,11 @@ public class StringConverter {
     }
 
     private void writeToFile(File file, String writeString) {
-        boolean fileIsExists = file.exists();
+        boolean isFileExists = file.exists();
         try (BufferedWriter br = new BufferedWriter(new FileWriter(file));
              PrintWriter pr = new PrintWriter(br)) {
             pr.write(writeString);
-            if (fileIsExists)
+            if (isFileExists)
                 System.out.println("Файл " + file.getName() + " заполнен.");
             else
                 System.out.println("Файл " + file.getName() + " создан.");
