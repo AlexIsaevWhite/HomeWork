@@ -1,10 +1,6 @@
 package ru.isaev.lesson19.resources;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
 
 public abstract class FileReaderWriter {
 
@@ -41,65 +37,5 @@ public abstract class FileReaderWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Создание и заполнение архива формата Zip
-     *
-     * @param zipFile Zip файл, который будет создан или заполнен
-     * @param file    файл, который будет заархивирован
-     */
-    public static void writeZipFile(File zipFile, File file) {
-        byte[] buffer = new byte[0];
-        ArrayList<FileFromZip> filesFromZip = new ArrayList<>();
-        if (file != null)
-            try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))) {
-                buffer = bis.readAllBytes();
-            } catch (FileNotFoundException e) {
-                System.out.println("Файл не найден.");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        if (zipFile.exists())
-            filesFromZip = readZipFile(zipFile);
-        try (ZipOutputStream zout = new ZipOutputStream(new FileOutputStream(zipFile))) {
-            ZipEntry entry;
-            for (FileFromZip f : filesFromZip) {
-                if (file == null || !f.NAME.equals(file.getName())) {
-                    entry = new ZipEntry(f.NAME);
-                    zout.putNextEntry(entry);
-                    zout.write(f.BODY);
-                    zout.closeEntry();
-                }
-            }
-            if (file != null) {
-                entry = new ZipEntry(file.getName());
-                zout.putNextEntry(entry);
-                zout.write(buffer);
-                zout.closeEntry();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static ArrayList<FileFromZip> readZipFile(File zipFile) {
-        ArrayList<FileFromZip> arrayFiles = new ArrayList<>();
-        try (ZipInputStream zis = new ZipInputStream(new FileInputStream(zipFile))) {
-            ZipEntry inputEntry;
-            byte[] buffer;
-            while ((inputEntry = zis.getNextEntry()) != null) {
-                buffer = zis.readAllBytes();
-                arrayFiles.add(new FileFromZip(inputEntry.getName(), buffer));
-                zis.closeEntry();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Файл не найден.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return arrayFiles;
     }
 }

@@ -3,19 +3,20 @@ package ru.isaev.lesson19;
 import ru.isaev.lesson19.resources.FileReaderWriter;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.Formatter;
 import java.util.Scanner;
 
 public class CashReceipt {
-    final static String SEPARATOR = File.separator + File.separator;
-    final File PROJECT_PATH = new File("src" + SEPARATOR + "main" + SEPARATOR + "java" + SEPARATOR
-            + "ru" + SEPARATOR + "isaev" + SEPARATOR + "lesson19");
-    final File TARGET_PATH = new File("target" + SEPARATOR + "classes" + SEPARATOR
-            + "ru" + SEPARATOR + "isaev" + SEPARATOR + "lesson19");
-    final File PRODUCTS = new File(PROJECT_PATH, "products.txt");
-    final File OUT_CHECK = new File(TARGET_PATH, "out.txt");
-    final File ZIP = new File(TARGET_PATH, "Zip.zip");
+    final static String SEP = File.separator;
+    final Path PROJECT_PATH = Paths.get("src" + SEP + "main" + SEP + "java" + SEP
+            + "ru" + SEP + "isaev" + SEP + "lesson19");
+    final Path TARGET_PATH = Paths.get("target" + SEP + "classes" + SEP
+            + "ru" + SEP + "isaev" + SEP + "lesson19");
+    final File PRODUCTS = new File(PROJECT_PATH.toString(), "products.txt");
+    final File OUT_CHECK = new File(TARGET_PATH.toString(), "out.txt");
     String name;
     double amount;
     double count;
@@ -31,7 +32,6 @@ public class CashReceipt {
         String check = formatInCheck(strFromFile);
         System.out.println(check);
         FileReaderWriter.writeTextFile(OUT_CHECK, check);
-        FileReaderWriter.writeZipFile(ZIP, OUT_CHECK);
     }
 
     private String formatInCheck(String text) {
@@ -50,10 +50,10 @@ public class CashReceipt {
             cost = amount * count;
             result += cost;
             check.format("%-15s %8.2f", name, amount);
-            check.format(" x %-10.3f =%8.2f %s", count, cost, System.lineSeparator());
+            check.format(" x %-10.3f =%8.3f %s", count, cost, System.lineSeparator());
         }
         check.format("=============================================== %s", System.lineSeparator());
-        check.format("Итого:                           %14.2f", result);
+        check.format("Итого:                           %14.3f", result);
         return check.toString();
     }
 }
