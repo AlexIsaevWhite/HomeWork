@@ -37,10 +37,11 @@ public class Library implements Serializable {
             while (oos.available() > 0) {
                 oos.readByte();
                 Object readObject = oos.readObject();
-                if (readObject instanceof Book)
+                if (readObject instanceof Book) {
                     books.add((Book) readObject);
-                else
+                } else {
                     throw new ClassNotFoundException();
+                }
             }
         } catch (FileNotFoundException e) {
             System.out.println("Библиотека не найдена.");
@@ -61,10 +62,11 @@ public class Library implements Serializable {
      */
     public void addBook(String name, String author, String year) {
         Book newBook = new Book(name, author, year);
-        if (books.contains(newBook))
+        if (books.contains(newBook)) {
             System.out.println("Такая книга уже существует.");
-        else
+        } else {
             books.add(newBook);
+        }
     }
 
     /**
@@ -77,10 +79,12 @@ public class Library implements Serializable {
     public void deleteBook(String name, String author, String year) {
         System.out.println("Удаление книги: " + name + ", авторства: " + author);
         if (books != null) {
-            if (!books.remove(new Book(name, author, year)))
+            if (!books.remove(new Book(name, author, year))) {
                 System.out.println("Такой книги нет в архиве.");
-        } else
+            }
+        } else {
             System.out.println("Архив уже пуст.");
+        }
 
     }
 

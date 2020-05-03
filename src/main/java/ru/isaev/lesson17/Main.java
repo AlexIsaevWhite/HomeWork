@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main {
-    final private String SEPARATOR = File.separator + File.separator;
-    final private File DEFAULT_DESTANATION = new File("target" + SEPARATOR + "classes" + SEPARATOR + "ru" +
+    final private String SEPARATOR = File.separator;
+    final private File DEFAULT_DESTINATION = new File("target" + SEPARATOR + "classes" + SEPARATOR + "ru" +
             SEPARATOR + "isaev" + SEPARATOR + "lesson17" + SEPARATOR + "Library.bin");
     private Library myLabrary;
 
@@ -23,9 +23,9 @@ public class Main {
 
     private void initialization() {
         myLabrary = new Library();
-        if (DEFAULT_DESTANATION.exists())
+        if (DEFAULT_DESTINATION.exists())
             try {
-                myLabrary.readFromFile(DEFAULT_DESTANATION);
+                myLabrary.readFromFile(DEFAULT_DESTINATION);
             } catch (IOException e) {
                 createLibrary();
             }
@@ -37,7 +37,7 @@ public class Main {
     private void createLibrary() {
         System.out.println("Создается архив.");
         addBooksInLabrary();
-        myLabrary.writeToFile(DEFAULT_DESTANATION);
+        myLabrary.writeToFile(DEFAULT_DESTINATION);
     }
 
     private void viewLibrary() {
@@ -58,6 +58,6 @@ public class Main {
         System.out.println("Попытка удалить определенные книги из архива...");
         myLabrary.deleteBook("Сильмариллион", "Дж. Толкин", "1977 г.");
         myLabrary.deleteBook("Ведьмак", "Андж. Сапковский", "1986 г.");
-        myLabrary.writeToFile(DEFAULT_DESTANATION);
+        myLabrary.writeToFile(DEFAULT_DESTINATION);
     }
 }
