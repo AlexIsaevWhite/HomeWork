@@ -3,13 +3,15 @@ package ru.isaev.lesson18;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class StringConverter {
-    final private String SEPARATOR = File.separator + File.separator;
-    final private File DEFAULT_DESTANATION = new File("target" + SEPARATOR + "classes" + SEPARATOR + "ru" +
-            SEPARATOR + "isaev" + SEPARATOR + "lesson18");
-    final private File INPUT_FILE = new File(DEFAULT_DESTANATION, "DefaultText.txt");
-    final private File OUTPUT_FILE = new File(DEFAULT_DESTANATION, "ConvertedText.txt");
+    final private String SEP = File.separator;
+    final private Path DEFAULT_DESTINATION = Paths.get("target" + SEP + "classes" + SEP + "ru" +
+            SEP + "isaev" + SEP + "lesson18");
+    final private File INPUT_FILE = new File(DEFAULT_DESTINATION.toString(), "DefaultText.txt");
+    final private File OUTPUT_FILE = new File(DEFAULT_DESTINATION.toString(), "ConvertedText.txt");
     final private Charset inputCharset;
     final private Charset outputCharset;
 
@@ -31,17 +33,18 @@ public class StringConverter {
 
     private StringBuilder readFromFile(File file) {
         StringBuilder tempString = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(file));
-             PushbackReader pr = new PushbackReader(br)) {
-            while (pr.ready()) {
-                tempString.append((char) pr.read());
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            while (br.ready()) {
+                tempString.append((char) br.read());
             }
             System.out.println("Файл " + file.getName() + " прочтён.");
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден.");
+            // Создание тестового файла при его отсутствии
             String testString = "Это тестовая строка.";
             writeToFile(file, testString);
             return new StringBuilder(testString);
+            //
         } catch (IOException e) {
             System.err.println("Неверный формат файла.");
         }
@@ -50,13 +53,13 @@ public class StringConverter {
 
     private void writeToFile(File file, String writeString) {
         boolean isFileExists = file.exists();
-        try (BufferedWriter br = new BufferedWriter(new FileWriter(file));
-             PrintWriter pr = new PrintWriter(br)) {
-            pr.write(writeString);
-            if (isFileExists)
+        try (BufferedWriter br = new BufferedWriter(new FileWriter(file))) {
+            br.write(writeString);
+            if (isFileExists) {
                 System.out.println("Файл " + file.getName() + " заполнен.");
-            else
+            } else {
                 System.out.println("Файл " + file.getName() + " создан.");
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Файл не найден.");
         } catch (IOException e) {
