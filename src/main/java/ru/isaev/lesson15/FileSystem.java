@@ -77,21 +77,7 @@ public class FileSystem {
     }
 
     private void printContent(File dir) {
-        if (dir.exists()) {
-            File[] files = dir.listFiles();
-            String path = SEPARATOR + dir.getName() + SEPARATOR;
-            if (files != null) {
-                for (File file : files) {
-                    if (file.isFile()) {
-                        System.out.println(path);
-                        showDepth(path.length());
-                        System.out.println(file.getName());
-                    } else {
-                        printContent(file, path.length());
-                    }
-                }
-            }
-        }
+        printContent(dir, 0);
     }
 
     private void printContent(File dir, int depth) {
