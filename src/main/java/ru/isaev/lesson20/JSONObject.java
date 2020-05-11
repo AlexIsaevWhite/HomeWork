@@ -1,15 +1,13 @@
 package ru.isaev.lesson20;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonAutoDetect
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class JSONObject {
-    @JsonIgnore
-    private ArrayList<Object> breeds;
-    @JsonIgnore
+    private Object[] breeds;
+    private Object[] categories;
     private String id;
     private String url;
     private int width;
@@ -18,20 +16,23 @@ public class JSONObject {
     public JSONObject() {
     }
 
-    public JSONObject(ArrayList<Object> breeds, String id, String url, int width, int height) {
+    public JSONObject(Object[] breeds, Object[] categories, String id, String url, int width, int height) {
         this.breeds = breeds;
+        this.categories = categories;
         this.id = id;
         this.url = url;
         this.width = width;
         this.height = height;
     }
 
-    @JsonIgnore
-    public ArrayList<Object> getBreeds() {
+    public Object[] getBreeds() {
         return breeds;
     }
 
-    @JsonIgnore
+    public Object[] getCategories() {
+        return categories;
+    }
+
     public String getId() {
         return id;
     }
