@@ -11,11 +11,10 @@ import java.util.Scanner;
 
 public class CashReceipt {
     final static String SEP = File.separator;
-    final Path PROJECT_PATH = Paths.get("src" + SEP + "main" + SEP + "java" + SEP
-            + "ru" + SEP + "isaev" + SEP + "lesson19");
+    final Path PRODUCTS_PATH = Paths.get("src" + SEP + "main" + SEP + "resources");
     final Path TARGET_PATH = Paths.get("target" + SEP + "classes" + SEP
             + "ru" + SEP + "isaev" + SEP + "lesson19");
-    final File PRODUCTS = new File(PROJECT_PATH.toString(), "products.txt");
+    final File PRODUCTS = new File(PRODUCTS_PATH.toString(), "products.txt");
     final File OUT_CHECK = new File(TARGET_PATH.toString(), "out.txt");
     String name;
     double amount;
