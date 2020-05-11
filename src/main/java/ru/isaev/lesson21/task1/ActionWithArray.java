@@ -1,24 +1,33 @@
 package ru.isaev.lesson21.task1;
 
+import java.util.Arrays;
+
 public class ActionWithArray {
-    private final int[] FOR_ARRAY = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    private final int[][] ARRAY = {FOR_ARRAY.clone(), FOR_ARRAY.clone(), FOR_ARRAY.clone()};
 
     public static void main(String[] args) {
-        new ActionWithArray().toLeft();
+        int[] forArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int[][] array = {forArray.clone(), forArray.clone(), forArray};
+        showArray(array);
+        toLeft(array);
+        showArray(array);
     }
 
-    public void toLeft() {
-        for (int[] a : ARRAY) {
+    static void toLeft(int[][] array) {
+        for (int[] a : array) {
             for (int b = 0; b < a.length; b++) {
                 if (b != a.length - 1) {
                     a[b] = a[b + 1];
                 } else {
                     a[b] = 0;
                 }
-                System.out.printf("%d, ", a[b]);
             }
-            System.out.println();
         }
+    }
+
+    static void showArray(int[][] array) {
+        for (int[] i : array) {
+            System.out.println(Arrays.toString(i));
+        }
+        System.out.println();
     }
 }
