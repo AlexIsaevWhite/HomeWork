@@ -10,12 +10,16 @@ public class StringFilter {
         String[] strings = {"foo", "buzz", "bar", "fork", "bort", "spoon", "!", "dude"};
         Set<String> elements = new HashSet<>(Arrays.asList(strings));
         showInConsole(elements);
-        removeEvenLength(elements);
-        showInConsole(elements);
+        Set<String> resElements = removeEvenLength(elements);
+        showInConsole(resElements);
     }
 
-    static void removeEvenLength(Set<String> set) {
-        set.removeIf(s -> s.length() % 2 == 0);
+    static Set<String> removeEvenLength(Set<String> set) {
+        Set<String> result = new HashSet<>(set);
+        for (String s : set)
+            if (s.length() % 2 == 0)
+                result.remove(s);
+        return result;
     }
 
     static void showInConsole(Set<String> collection) {
