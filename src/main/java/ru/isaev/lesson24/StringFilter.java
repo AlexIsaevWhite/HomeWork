@@ -9,20 +9,14 @@ public class StringFilter {
     public static void main(String[] args) {
         String[] strings = {"foo", "buzz", "bar", "fork", "bort", "spoon", "!", "dude"};
         Set<String> elements = new HashSet<>(Arrays.asList(strings));
-        showInConsole(elements);
+        System.out.println(elements);
         Set<String> resElements = removeEvenLength(elements);
-        showInConsole(resElements);
+        System.out.println(resElements);
     }
 
-    static Set<String> removeEvenLength(Set<String> set) {
+    public static Set<String> removeEvenLength(Set<String> set) {
         Set<String> result = new HashSet<>(set);
         result.removeIf(s -> s.length() % 2 == 0);
         return result;
-    }
-
-    static void showInConsole(Set<String> collection) {
-        String s = Arrays.toString(collection.toArray());
-        System.out.println(s);
-        System.out.println();
     }
 }
