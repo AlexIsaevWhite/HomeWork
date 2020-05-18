@@ -7,45 +7,41 @@ public class InternetShop {
     private final String buckwheat = "Гречка";
     private final String pasta = "Макароны";
     private final String meet = "Мясо";
-    private final SimpleBasket simpleBaskets =
-            new SimpleBasket(new String[]{meet, buckwheat}, new int[]{1, 3});
+    private final SimpleBasket simpleBaskets = new SimpleBasket() {
+        {
+            addProduct(oatmeal, 5);
+            addProduct(buckwheat, 4);
+            addProduct(pasta, 3);
+            addProduct(meet, 1);
+        }
+    };
 
     public static void main(String[] args) {
         new InternetShop().startShopping();
     }
 
     public void startShopping() {
-        addProducts();
         viewProducts();
         updateProducts();
-        deleteProducts();
+        viewProducts();
+        simpleBaskets.removeProduct(buckwheat);
         viewProducts();
         simpleBaskets.clear();
         viewProducts();
     }
 
-    public void addProducts() {
-        simpleBaskets.addProduct(oatmeal, 5);
-        simpleBaskets.addProduct(pasta, 3);
-    }
-
     public void updateProducts() {
         simpleBaskets.updateProductQuantity(meet, 5);
-        simpleBaskets.updateProductQuantity(buckwheat, 1);
-        System.out.println("Ассортимент обновился:");
-        System.out.println(meet + ": " + simpleBaskets.getProductQuantity(meet) + " шт.");
-        System.out.println(buckwheat + ": " + simpleBaskets.getProductQuantity(buckwheat) + " шт.");
+        int quantityOfPasta = simpleBaskets.getProductQuantity(pasta);
+        simpleBaskets.updateProductQuantity(buckwheat, quantityOfPasta);
+        System.out.println("Ассортимент обновился...");
         System.out.println();
-    }
-
-    public void deleteProducts() {
-        simpleBaskets.removeProduct(buckwheat);
     }
 
     public void viewProducts() {
         List<String> strProducts = simpleBaskets.getSimpleBaskets();
         if (!strProducts.isEmpty()) {
-            for (String s : simpleBaskets.getSimpleBaskets()) {
+            for (String s : strProducts) {
                 System.out.println(s);
             }
             System.out.println();

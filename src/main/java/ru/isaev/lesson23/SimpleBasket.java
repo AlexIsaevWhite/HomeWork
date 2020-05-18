@@ -7,13 +7,6 @@ class SimpleBasket implements Basket {
     private ArrayList<String> productsName = new ArrayList<>();
     private ArrayList<Integer> productsQuantity = new ArrayList<>();
 
-    SimpleBasket(String[] name, int[] quantity) {
-        for (int i = 0; i < name.length; i++) {
-            productsName.add(name[i]);
-            productsQuantity.add(quantity[i]);
-        }
-    }
-
     @Override
     public void addProduct(String product, int quantity) {
         int indexOfProduct = productsName.indexOf(product);
@@ -62,20 +55,4 @@ class SimpleBasket implements Basket {
         int indexOfProduct = productsName.indexOf(product);
         return productsQuantity.get(indexOfProduct);
     }
-
-    /*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o instanceof SimpleBasket) {
-            SimpleBasket simpleBasket = (SimpleBasket) o;
-            return name.equals(simpleBasket.name);
-        } else return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(quantity, name);
-    }
-     */
 }
