@@ -16,9 +16,7 @@ public class StringFilter {
 
     static Set<String> removeEvenLength(Set<String> set) {
         Set<String> result = new HashSet<>(set);
-        for (String s : set)
-            if (s.length() % 2 == 0)
-                result.remove(s);
+        result.removeIf(s -> s.length() % 2 == 0);
         return result;
     }
 
