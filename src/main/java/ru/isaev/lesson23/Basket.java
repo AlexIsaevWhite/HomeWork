@@ -11,7 +11,7 @@ interface Basket {
 
     void clear();
 
-    List<String> getProducts();
+    List<String> getSimpleBaskets();
 
     int getProductQuantity(String product);
 }
