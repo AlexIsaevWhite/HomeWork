@@ -1,10 +1,6 @@
 package ru.isaev.lesson25.task2;
 
-public class InternetBasket {
-    /*
-    25_ДЗ_2_Корзина с использованием мапы
-Реализовать класс корзины интернет магазина по следующему интерфейсу, используя
-реализацию мапы:
+import java.util.List;
 
 interface Basket {
 
@@ -20,6 +16,4 @@ interface Basket {
 
     int getProductQuantity(String product);
 
-}
-     */
 }
