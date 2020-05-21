@@ -1,19 +1,47 @@
 package ru.isaev.lesson25.task1;
 
+import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
+
 public class MapFilter {
-    /*
-    25_ДЗ_1_Фильтр мапы
-public boolean isUnique(Map<String, String> map);
+    public static void main(String[] args) {
+        String[] key = {"Вася", "Петр", "Виктор", "Сергей", "Вадим"};
+        String[] value1 = {"Иванов", "Петров", "Сидоров", "Савельев", "Викторов"};
+        String[] value2 = {"Иванов", "Петров", "Иванов", "Савельев", "Петров"};
+        Map<String, String> map1 = new TreeMap<String, String>() {
+            {
+                putKeyAndValue(key, value1, this);
+            }
+        };
+        Map<String, String> map2 = new TreeMap<String, String>() {
+            {
+                putKeyAndValue(key, value2, this);
+            }
+        };
+        System.out.println("В map1 нет одинаковых value: " + isUnique(map1));
+        System.out.println("В map2 нет одинаковых value: " + isUnique(map2));
+    }
 
-Написать метод, который возвращает true, если в мапе нет двух и более одинаковых
-value, и false в противном случае.
+    public static boolean isUnique(Map<String, String> map) {
+        if (map.isEmpty()) return true;
+        Collection<String> values = map.values();
+        int identicalElem;
+        for (String s1 : values) {
+            identicalElem = 0;
+            for (String s2 : values) {
+                if (s1.equals(s2))
+                    identicalElem++;
+            }
+            if (identicalElem > 1)
+                return false;
+        }
+        return true;
+    }
 
-Для пустой мапы метод возвращает true.
-
-Например, для метода {Вася=Иванов, Петр=Петров, Виктор=Сидоров, Сергей=Савельев,
-Вадим=Викторов} метод вернет true,
-
-а для {Вася=Иванов, Петр=Петров, Виктор=Иванов, Сергей=Савельев, Вадим=Петров}
-метод вернет false.
-     */
+    static void putKeyAndValue(String[] key, String[] value, Map<String, String> map) {
+        for (int i = 0; i < key.length; i++) {
+            map.put(key[i], value[i]);
+        }
+    }
 }
