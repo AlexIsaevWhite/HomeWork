@@ -11,12 +11,12 @@ public class MapFilter {
         String[] value2 = {"Иванов", "Петров", "Иванов", "Савельев", "Петров"};
         Map<String, String> map1 = new TreeMap<String, String>() {
             {
-                putKeyAndValue(key, value1, this);
+                putArrays(key, value1, this);
             }
         };
         Map<String, String> map2 = new TreeMap<String, String>() {
             {
-                putKeyAndValue(key, value2, this);
+                putArrays(key, value2, this);
             }
         };
         System.out.println("В map1 нет одинаковых value: " + isUnique(map1));
@@ -39,7 +39,7 @@ public class MapFilter {
         return true;
     }
 
-    static void putKeyAndValue(String[] key, String[] value, Map<String, String> map) {
+    static void putArrays(String[] key, String[] value, Map<String, String> map) {
         for (int i = 0; i < key.length; i++) {
             map.put(key[i], value[i]);
         }
