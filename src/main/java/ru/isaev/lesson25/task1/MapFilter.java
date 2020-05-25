@@ -1,6 +1,7 @@
 package ru.isaev.lesson25.task1;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -27,12 +28,8 @@ public class MapFilter {
         if (map.isEmpty()) return true;
         Collection<String> values = map.values();
         int identicalElem;
-        for (String s1 : values) {
-            identicalElem = 0;
-            for (String s2 : values) {
-                if (s1.equals(s2))
-                    identicalElem++;
-            }
+        for (String s : values) {
+            identicalElem = Collections.frequency(values, s);
             if (identicalElem > 1)
                 return false;
         }
