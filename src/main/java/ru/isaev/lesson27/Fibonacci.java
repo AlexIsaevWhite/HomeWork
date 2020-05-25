@@ -5,31 +5,38 @@ import java.util.Arrays;
 public class Fibonacci {
 
     public static void main(String[] args) {
-        int firstNum = 0;
-        int secondNum = 1;
-        int[] fibonacciArray = new int[15];
-        fibonacciIteration(fibonacciArray, firstNum, secondNum);
+        int num = 11;
+        int[] fibonacciArray = fibonacciIteration(num);
         System.out.println(Arrays.toString(fibonacciArray));
-        fibonacciRecursion(fibonacciArray, firstNum, secondNum);
+        fibonacciArray = fibonacciRecursion(num);
         System.out.println(Arrays.toString(fibonacciArray));
     }
 
-    static void fibonacciIteration(int[] array, int firstNum, int secondNum) {
-        array[0] = firstNum;
-        for (int i = 1; i < array.length; i++) {
-            if (i < 2)
-                array[i] = secondNum;
+    static int[] fibonacciIteration(int numbers) {
+        int[] fibonacciArray = new int[numbers];
+        int zero = 0;
+        int first = 1;
+        for (int i = 0; i < fibonacciArray.length; i++) {
+            if (i == zero)
+                fibonacciArray[i] = zero;
+            else if (i == first)
+                fibonacciArray[i] = first;
             else
-                array[i] = array[i - 1] + array[i - 2];
+                fibonacciArray[i] = fibonacciArray[i - 1] + fibonacciArray[i - 2];
         }
+        return fibonacciArray;
     }
 
-    static void fibonacciRecursion(int[] array, int firstNum, int secondNum) {
-        array[0] = firstNum;
-        if (array.length != 1)
-            array[1] = secondNum;
-        if (array.length > 2)
-            forFibonacciRecursion(array, 2);
+    static int[] fibonacciRecursion(int numbers) {
+        int[] fibonacciArray = new int[numbers];
+        int zero = 0;
+        int number = 1;
+        fibonacciArray[zero] = zero;
+        if (fibonacciArray.length != number)
+            fibonacciArray[number] = number++;
+        if (fibonacciArray.length > number)
+            forFibonacciRecursion(fibonacciArray, number);
+        return fibonacciArray;
     }
 
     private static void forFibonacciRecursion(int[] array, int numOfRecur) {
