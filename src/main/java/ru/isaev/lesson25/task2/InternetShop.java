@@ -7,7 +7,7 @@ public class InternetShop {
     private final String buckwheat = "Гречка";
     private final String pasta = "Макароны";
     private final String meet = "Мясо";
-    private final IntrenetBasket intrenetBasket = new IntrenetBasket() {
+    private final InternetBasket internetBasket = new InternetBasket() {
         {
             addProduct(oatmeal, 5);
             addProduct(buckwheat, 4);
@@ -24,30 +24,29 @@ public class InternetShop {
         viewProducts();
         updateProducts();
         viewProducts();
-        intrenetBasket.removeProduct(buckwheat);
+        internetBasket.removeProduct(buckwheat);
         viewProducts();
-        intrenetBasket.clear();
+        internetBasket.clear();
         viewProducts();
     }
 
     public void updateProducts() {
-        intrenetBasket.updateProductQuantity(meet, 5);
-        int quantityOfPasta = intrenetBasket.getProductQuantity(pasta);
-        intrenetBasket.updateProductQuantity(buckwheat, quantityOfPasta);
+        internetBasket.updateProductQuantity(meet, 5);
+        int quantityOfPasta = internetBasket.getProductQuantity(pasta);
+        internetBasket.updateProductQuantity(buckwheat, quantityOfPasta);
         System.out.println("Ассортимент обновился...");
         System.out.println();
     }
 
     public void viewProducts() {
-        List<String> strProducts = intrenetBasket.getProducts();
+        List<String> strProducts = internetBasket.getProducts();
         if (!strProducts.isEmpty()) {
             for (String s : strProducts) {
-                System.out.println(s);
+                System.out.println(s + " " + internetBasket.getProductQuantity(s) + " шт.");
             }
-            System.out.println();
         } else {
             System.out.println("Продуктов нет в корзине.");
-            System.out.println();
         }
+        System.out.println();
     }
 }

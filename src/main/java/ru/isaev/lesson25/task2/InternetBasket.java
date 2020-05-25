@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class IntrenetBasket implements ru.isaev.lesson25.task2.Basket {
+class InternetBasket implements ru.isaev.lesson25.task2.Basket {
     private Map<String, Integer> products = new HashMap<>();
 
     @Override
@@ -34,11 +34,7 @@ class IntrenetBasket implements ru.isaev.lesson25.task2.Basket {
 
     @Override
     public List<String> getProducts() {
-        List<String> outList = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : products.entrySet()) {
-            outList.add("Название: " + entry.getKey() + "\t количество: " + entry.getValue() + " шт.");
-        }
-        return outList;
+        return new ArrayList<>(products.keySet());
     }
 
     @Override
