@@ -42,7 +42,7 @@ class SimpleBasket implements Basket {
     }
 
     @Override
-    public List<String> getSimpleBaskets() {
+    public List<String> getProducts() {
         List<String> outList = new ArrayList<>();
         for (int i = 0; i < productsName.size(); i++) {
             outList.add("Название: " + productsName.get(i) + "\t количество: " + productsQuantity.get(i) + " шт.");

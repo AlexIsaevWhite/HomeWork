@@ -39,7 +39,7 @@ public class InternetShop {
     }
 
     public void viewProducts() {
-        List<String> strProducts = simpleBaskets.getSimpleBaskets();
+        List<String> strProducts = simpleBaskets.getProducts();
         if (!strProducts.isEmpty()) {
             for (String s : strProducts) {
                 System.out.println(s);
