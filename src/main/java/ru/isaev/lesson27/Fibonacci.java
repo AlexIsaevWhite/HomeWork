@@ -25,20 +25,20 @@ public class Fibonacci {
 
     static int[] fibonacciRecursion(int numbers) {
         int[] fibonacciArray = new int[numbers];
-        int zero = 0;
-        int number = 1;
-        fibonacciArray[zero] = zero;
-        if (fibonacciArray.length != number)
-            fibonacciArray[number] = number++;
-        if (fibonacciArray.length > number)
-            forFibonacciRecursion(fibonacciArray, number);
+        if (fibonacciArray.length > 1)
+            forFibonacciRecursion(fibonacciArray, 0);
         return fibonacciArray;
     }
 
     private static void forFibonacciRecursion(int[] array, int numOfRecur) {
-        int result = array[numOfRecur - 1] + array[numOfRecur - 2];
-        array[numOfRecur++] = result;
+        if (numOfRecur < 2) {
+            array[numOfRecur] = numOfRecur++;
+        } else {
+            int result = array[numOfRecur - 1] + array[numOfRecur - 2];
+            array[numOfRecur++] = result;
+        }
         if (numOfRecur == array.length) return;
         forFibonacciRecursion(array, numOfRecur);
+
     }
 }
