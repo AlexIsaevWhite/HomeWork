@@ -20,9 +20,7 @@ class InternetBasket implements ru.isaev.lesson25.task2.Basket {
 
     @Override
     public void updateProductQuantity(String product, int quantity) {
-        if (products.containsKey(product)) {
-            products.put(product, quantity);
-        } else {
+        if (products.replace(product, quantity) == null) {
             System.out.println("Данный продукт отсутствует.");
         }
     }
