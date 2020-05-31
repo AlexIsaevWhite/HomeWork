@@ -27,10 +27,8 @@ public class MapFilter {
     public static boolean isUnique(Map<String, String> map) {
         if (map.isEmpty()) return true;
         Collection<String> values = map.values();
-        int identicalElem;
         for (String s : values) {
-            identicalElem = Collections.frequency(values, s);
-            if (identicalElem > 1)
+            if (Collections.frequency(values, s) > 1)
                 return false;
         }
         return true;
