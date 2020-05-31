@@ -1,6 +1,9 @@
 package ru.isaev.lesson29;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyMap {
 
@@ -28,14 +31,17 @@ public class MyMap {
     }
 
     public static void removeTheDuplicates(Map<String, Person> map) {
-        ArrayList<Person> forRemove = new ArrayList<>();
+        HashMap<String, Person> forRemove = new HashMap<>();
         Collection<Person> values = map.values();
-        for (Person person : values) {
-            if (Collections.frequency(values, person) > 1 && !forRemove.contains(person)) {
-                forRemove.add(person);
+        for (Map.Entry<String, Person> entry : map.entrySet()) {
+            String s = entry.getKey();
+            Person p = entry.getValue();
+            if (Collections.frequency(values, p) > 1 && !forRemove.containsValue(p)) {
+                forRemove.put(s, p);
             }
         }
-        forRemove.forEach((person) -> removeItemFromMapByValue(map, person));
+        forRemove.forEach((key, person) -> removeItemFromMapByValue(map, person));
+        forRemove.forEach(map::put);
     }
 
     public static void removeItemFromMapByValue(Map<String, Person> map, Person value) {
