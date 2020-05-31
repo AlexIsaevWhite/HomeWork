@@ -14,13 +14,9 @@ public class Fibonacci {
 
     static int[] fibonacciIteration(int numbers) {
         int[] fibonacciArray = new int[numbers];
-        int zero = 0;
-        int first = 1;
         for (int i = 0; i < fibonacciArray.length; i++) {
-            if (i == zero)
-                fibonacciArray[i] = zero;
-            else if (i == first)
-                fibonacciArray[i] = first;
+            if (i < 2)
+                fibonacciArray[i] = i;
             else
                 fibonacciArray[i] = fibonacciArray[i - 1] + fibonacciArray[i - 2];
         }
