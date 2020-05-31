@@ -31,17 +31,19 @@ public class MyMap {
     }
 
     public static void removeTheDuplicates(Map<String, Person> map) {
-        HashMap<String, Person> forRemove = new HashMap<>();
-        Collection<Person> values = map.values();
-        for (Map.Entry<String, Person> entry : map.entrySet()) {
-            String s = entry.getKey();
-            Person p = entry.getValue();
-            if (Collections.frequency(values, p) > 1 && !forRemove.containsValue(p)) {
-                forRemove.put(s, p);
+        if (map != null) {
+            HashMap<String, Person> forRemove = new HashMap<>();
+            Collection<Person> values = map.values();
+            for (Map.Entry<String, Person> entry : map.entrySet()) {
+                String s = entry.getKey();
+                Person p = entry.getValue();
+                if (Collections.frequency(values, p) > 1 && !forRemove.containsValue(p)) {
+                    forRemove.put(s, p);
+                }
             }
+            forRemove.forEach((key, person) -> removeItemFromMapByValue(map, person));
+            forRemove.forEach(map::put);
         }
-        forRemove.forEach((key, person) -> removeItemFromMapByValue(map, person));
-        forRemove.forEach(map::put);
     }
 
     public static void removeItemFromMapByValue(Map<String, Person> map, Person value) {
