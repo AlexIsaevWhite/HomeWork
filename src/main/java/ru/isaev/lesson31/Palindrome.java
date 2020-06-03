@@ -1,16 +1,36 @@
 package ru.isaev.lesson31;
 
 public class Palindrome {
-    /*
-    ДЗ 31
-    Палиндром - это слово, фраза, число или другая последовательность символов или элементов, которая читает то же самое вперед или назад.
 
-            Например: 12121 - палиндром, так как он читает то же самое вперед или назад. мадам тоже палиндром.
+    public static void main(String[] args) {
+        String[] string = {"12121", "abba", "addidas"};
+        for (String s : string) {
+            System.out.println(s);
+            System.out.println("isPolidrome: " + isPolidrome(s));
+            System.out.println("isPolidromeStandartFunction: " + isPolidromeStandartFunction(s));
+            System.out.println();
+        }
+    }
 
-    Требуется написать 2 реализации проверки строки на палиндром:
+    static boolean isPolidrome(String input) {
+        boolean isPolidrome;
+        if (input != null) {
+            isPolidrome = true;
+            char[] chars = input.toCharArray();
+            for (int begin = 0, end = chars.length - 1; begin < end; begin++, end--) {
+                if (chars[begin] != chars[end]) {
+                    isPolidrome = false;
+                    break;
+                }
+            }
+        } else isPolidrome = false;
+        return isPolidrome;
+    }
 
-        1.Перемещение с обоих концов строки одновременно
-
-        2.Используя стандартные функции строки
-    */
+    static boolean isPolidromeStandartFunction(String input) {
+        StringBuilder buffer = new StringBuilder(input);
+        buffer.reverse();
+        String data = buffer.toString();
+        return input.equals(data);
+    }
 }
