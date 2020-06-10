@@ -2,18 +2,16 @@ package ru.isaev.lesson32;
 
 class BinaryTree<T extends Comparable<T>> {
     private T val;
-    private BinaryTree<T> left;
-    private BinaryTree<T> right;
     private BinaryTree<T> parent;
+    private BinaryTree<T> left = null;
+    private BinaryTree<T> right = null;
 
     public BinaryTree() {
         this.val = null;
         this.parent = null;
-        this.left = null;
-        this.right = null;
     }
 
-    public BinaryTree(T val, BinaryTree<T> parent) {
+    private BinaryTree(T val, BinaryTree<T> parent) {
         this.val = val;
         this.parent = parent;
     }
@@ -26,13 +24,13 @@ class BinaryTree<T extends Comparable<T>> {
         return right;
     }
 
-    void add(T... vals) {
+    public void add(T... vals) {
         for (T v : vals) {
             add(v);
         }
     }
 
-    void add(T val) {
+    public void add(T val) {
         if (this.val == null) {
             this.val = val;
         } else if (val.compareTo(this.val) < 0) {
