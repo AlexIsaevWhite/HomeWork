@@ -9,26 +9,25 @@ public class MaxCharNum {
         findMaxNumOfChar(s);
     }
 
-    static void findMaxNumOfChar(String inputString) {
-        if (inputString != null) {
-            List<Character> arr = new ArrayList<>();
-            Set<Character> hs = new HashSet<>();
-            char maxChar = ' ';
-            int numMaxChar = 0;
+    static void findMaxNumOfChar(String inputString) throws NullPointerException {
+        if (inputString == null) throw new NullPointerException();
+        List<Character> arr = new ArrayList<>();
+        Set<Character> hs = new HashSet<>();
+        int numMaxChar = 0;
+        char maxChar = 0;
 
-            for (char c : inputString.toCharArray()) {
-                arr.add(c);
-                hs.add(c);
+        inputString.chars().forEach((i) -> {
+            arr.add((char) i);
+            hs.add((char) i);
+        });
+        for (char c : hs) {
+            int temp = Collections.frequency(arr, c);
+            if (temp > numMaxChar) {
+                numMaxChar = temp;
+                maxChar = c;
             }
-            for (char c : hs) {
-                int temp = Collections.frequency(arr, c);
-                if (temp > numMaxChar) {
-                    numMaxChar = temp;
-                    maxChar = c;
-                }
-            }
-            print(maxChar, numMaxChar);
         }
+        print(maxChar, numMaxChar);
     }
 
     static private void print(char c, int i) {
