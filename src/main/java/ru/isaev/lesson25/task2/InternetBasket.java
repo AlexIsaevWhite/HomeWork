@@ -1,11 +1,14 @@
 package ru.isaev.lesson25.task2;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 class InternetBasket implements ru.isaev.lesson25.task2.Basket {
+    private final Logger LOGGER = Logger.getLogger(this.getClass());
     private Map<String, Integer> products = new HashMap<>();
 
     @Override
@@ -21,7 +24,7 @@ class InternetBasket implements ru.isaev.lesson25.task2.Basket {
     @Override
     public void updateProductQuantity(String product, int quantity) {
         if (products.replace(product, quantity) == null) {
-            System.out.println("Данный продукт отсутствует.");
+            LOGGER.debug(product + " отсутствует.");
         }
     }
 
