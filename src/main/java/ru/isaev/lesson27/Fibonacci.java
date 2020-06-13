@@ -30,15 +30,14 @@ public class Fibonacci {
         return fibonacciArray;
     }
 
-    private static void forFibonacciRecursion(int[] array, int numOfRecur) {
-        if (numOfRecur < 2) {
-            array[numOfRecur] = numOfRecur++;
+    private static void forFibonacciRecursion(int[] array, int depth) {
+        if (depth == array.length) return;
+        if (depth < 2) {
+            array[depth] = depth;
         } else {
-            int result = array[numOfRecur - 1] + array[numOfRecur - 2];
-            array[numOfRecur++] = result;
+            int result = array[depth - 1] + array[depth - 2];
+            array[depth] = result;
         }
-        if (numOfRecur == array.length) return;
-        forFibonacciRecursion(array, numOfRecur);
-
+        forFibonacciRecursion(array, ++depth);
     }
 }
