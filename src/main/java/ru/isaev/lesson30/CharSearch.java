@@ -15,14 +15,14 @@ public class CharSearch {
     }
 
     static char searchOriginality(String inputString) throws NullPointerException {
-        if (inputString != null) {
-            List<Character> characters = new ArrayList<>();
-            for (char c : inputString.toCharArray()) {
-                characters.add(c);
-            }
-            for (char c : characters)
-                if (Collections.frequency(characters, c) == 1) return c;
-        } else throw new NullPointerException();
+        if (inputString == null) throw new NullPointerException();
+        List<Character> charArr = new ArrayList<>();
+        for (char c : inputString.toCharArray()) {
+            charArr.add(c);
+        }
+        for (char c : charArr) {
+            if (Collections.frequency(charArr, c) == 1) return c;
+        }
         return ' ';
     }
 }
