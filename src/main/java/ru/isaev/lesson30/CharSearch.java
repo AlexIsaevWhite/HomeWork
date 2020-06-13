@@ -2,6 +2,7 @@ package ru.isaev.lesson30;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class CharSearch {
 
@@ -13,13 +14,15 @@ public class CharSearch {
         }
     }
 
-    static char searchOriginality(String inputString) {
-        ArrayList<Character> characters = new ArrayList<>();
-        for (char c : inputString.toCharArray()) {
-            characters.add(c);
-        }
-        for (char c : characters)
-            if (Collections.frequency(characters, c) == 1) return c;
+    static char searchOriginality(String inputString) throws NullPointerException {
+        if (inputString != null) {
+            List<Character> characters = new ArrayList<>();
+            for (char c : inputString.toCharArray()) {
+                characters.add(c);
+            }
+            for (char c : characters)
+                if (Collections.frequency(characters, c) == 1) return c;
+        } else throw new NullPointerException();
         return ' ';
     }
 }
