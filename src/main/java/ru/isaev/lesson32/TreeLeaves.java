@@ -10,7 +10,8 @@ public class TreeLeaves {
         System.out.println(howMuchLeaves(tree) + " шт. листьев");
     }
 
-    static int howMuchLeaves(BinaryTree binaryTree) {
+    static int howMuchLeaves(BinaryTree binaryTree) throws NullPointerException {
+        if (binaryTree == null) throw new NullPointerException();
         return searchLeaves(binaryTree, 0);
     }
 
