@@ -12,25 +12,18 @@ public class Palindrome {
         }
     }
 
-    static boolean isPalindrome(String input) {
-        boolean isPalindrome;
-        if (input != null) {
-            isPalindrome = true;
-            char[] chars = input.toCharArray();
-            for (int begin = 0, end = chars.length - 1; begin < end; begin++, end--) {
-                if (chars[begin] != chars[end]) {
-                    isPalindrome = false;
-                    break;
-                }
-            }
-        } else isPalindrome = false;
-        return isPalindrome;
+    static boolean isPalindrome(String input) throws NullPointerException {
+        if (input == null) throw new NullPointerException();
+        for (int begin = 0, end = input.length() - 1; begin < end; begin++, end--) {
+            if (input.charAt(begin) != input.charAt(end)) return false;
+        }
+        return true;
     }
 
-    static boolean isPalindromeStandardFunction(String input) {
-        StringBuilder buffer = new StringBuilder(input);
-        buffer.reverse();
-        String data = buffer.toString();
+    static boolean isPalindromeStandardFunction(String input) throws NullPointerException {
+        if (input == null) throw new NullPointerException();
+        StringBuilder sb = new StringBuilder(input);
+        String data = sb.reverse().toString();
         return input.equals(data);
     }
 }
