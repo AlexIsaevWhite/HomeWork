@@ -1,36 +1,43 @@
 package ru.isaev.lesson33;
 
-import java.util.*;
+import org.apache.log4j.Logger;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MaxCharNum {
+    private final static Logger LOGGER = Logger.getLogger(MaxCharNum.class);
 
     public static void main(String[] args) {
-        String s = "This is test message";
-        findMaxNumOfChar(s);
+        String s = "This is test message: ttt";
+        maxCountChar(s);
+        maxCountChar(null);
     }
 
-    static void findMaxNumOfChar(String inputString) throws NullPointerException {
-        if (inputString == null) throw new NullPointerException();
-        List<Character> arr = new ArrayList<>();
-        Set<Character> hs = new HashSet<>();
-        int numMaxChar = 0;
-        char maxChar = 0;
-
-        inputString.chars().forEach((i) -> {
-            arr.add((char) i);
-            hs.add((char) i);
-        });
-        for (char c : hs) {
-            int temp = Collections.frequency(arr, c);
-            if (temp > numMaxChar) {
-                numMaxChar = temp;
-                maxChar = c;
-            }
+    static void maxCountChar(String inputString) {
+        if (inputString == null) {
+            LOGGER.warn("inputString is null");
+            return;
         }
-        print(maxChar, numMaxChar);
+        Map<Character, Integer> charMap = new HashMap<>();
+        putNumChar(charMap, inputString);
+        printMax(charMap, Collections.max(charMap.values()));
     }
 
-    static private void print(char c, int i) {
-        System.out.println("Character: " + c + " has occurred maximum times in String: " + i);
+    static private void putNumChar(Map<Character, Integer> charMap, String string) {
+        int numChar;
+        for (char c : string.toCharArray()) {
+            numChar = charMap.getOrDefault(c, 0);
+            charMap.put(c, ++numChar);
+        }
+    }
+
+    static private void printMax(Map<Character, Integer> charMap, int maxCount) {
+        for (Map.Entry<Character, Integer> entry : charMap.entrySet()) {
+            if (entry.getValue() == maxCount)
+                System.out.println("Character: " + entry.getKey() + " has occurred maximum times in String: "
+                        + entry.getValue());
+        }
     }
 }
