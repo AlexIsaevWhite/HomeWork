@@ -2,7 +2,7 @@ package ru.isaev.lesson32;
 
 import org.apache.log4j.Logger;
 
-class BinaryTree<T extends Comparable<T>> {
+public class BinaryTree<T extends Comparable<T>> {
     private final Node<T> root = new Node<>(null);
     private final Logger LOGGER = Logger.getLogger(this.getClass());
 
