@@ -1,28 +1,10 @@
 package ru.isaev.lesson32;
 
+import org.apache.log4j.Logger;
+
 class BinaryTree<T extends Comparable<T>> {
-    private T val;
-    private BinaryTree<T> parent;
-    private BinaryTree<T> left = null;
-    private BinaryTree<T> right = null;
-
-    public BinaryTree() {
-        this.val = null;
-        this.parent = null;
-    }
-
-    private BinaryTree(T val, BinaryTree<T> parent) {
-        this.val = val;
-        this.parent = parent;
-    }
-
-    public BinaryTree<T> left() {
-        return left;
-    }
-
-    public BinaryTree<T> right() {
-        return right;
-    }
+    private final Node<T> root = new Node<>(null);
+    private final Logger LOGGER = Logger.getLogger(this.getClass());
 
     public void add(T... vals) {
         for (T v : vals) {
@@ -31,16 +13,47 @@ class BinaryTree<T extends Comparable<T>> {
     }
 
     public void add(T val) {
-        if (this.val == null) {
-            this.val = val;
-        } else if (val.compareTo(this.val) < 0) {
-            if (this.left == null) {
-                this.left = new BinaryTree<>(val, this);
-            } else this.left.add(val);
-        } else {
-            if (this.right == null) {
-                this.right = new BinaryTree<>(val, this);
-            } else this.right.add(val);
+        if (val == null) {
+            LOGGER.warn("input value is null");
+            return;
         }
+        if (root.val() == null) {
+            root.setVal(val);
+        } else {
+            add(root, val);
+        }
+    }
+
+    public int countLeaves() {
+        return searchLeaves(root, 0);
+    }
+
+    private void add(Node<T> root, T val) {
+        if (val.compareTo(root.val()) < 0) {
+            if (root.left() == null) {
+                root.setLeft(new Node<>(val));
+            } else {
+                add(root.left(), val);
+            }
+        } else {
+            if (root.right() == null) {
+                root.setRight(new Node<>(val));
+            } else {
+                add(root.right(), val);
+            }
+        }
+    }
+
+    private int searchLeaves(Node<T> root, int leaves) {
+        if (root.isLeafNode()) {
+            return ++leaves;
+        }
+        if (root.left() != null) {
+            leaves = searchLeaves(root.left(), leaves);
+        }
+        if (root.right() != null) {
+            leaves = searchLeaves(root.right(), leaves);
+        }
+        return leaves;
     }
 }
