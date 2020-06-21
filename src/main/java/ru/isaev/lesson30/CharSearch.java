@@ -18,15 +18,17 @@ public class CharSearch {
     }
 
     static char searchOriginality(String inputString) {
-        if (inputString != null) {
-            List<Character> charArr = new ArrayList<>();
-            for (char c : inputString.toCharArray()) {
-                charArr.add(c);
-            }
-            for (char c : charArr) {
-                if (Collections.frequency(charArr, c) == 1) return c;
-            }
-        } else LOGGER.warn("inputString is null");
+        if (inputString == null) {
+            LOGGER.warn("inputString is null");
+            return ' ';
+        }
+        List<Character> charArr = new ArrayList<>();
+        for (char c : inputString.toCharArray()) {
+            charArr.add(c);
+        }
+        for (char c : charArr) {
+            if (Collections.frequency(charArr, c) == 1) return c;
+        }
         return ' ';
     }
 }
