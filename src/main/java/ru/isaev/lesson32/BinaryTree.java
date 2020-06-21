@@ -3,8 +3,8 @@ package ru.isaev.lesson32;
 import org.apache.log4j.Logger;
 
 public class BinaryTree<T extends Comparable<T>> {
-    private final Node<T> root = new Node<>(null);
     private final Logger LOGGER = Logger.getLogger(this.getClass());
+    private Node<T> root = null;
 
     public void add(T... vals) {
         for (T v : vals) {
@@ -17,42 +17,43 @@ public class BinaryTree<T extends Comparable<T>> {
             LOGGER.warn("input value is null");
             return;
         }
-        if (root.val() == null) {
-            root.setVal(val);
+        if (root == null) {
+            root = new Node<>(val);
         } else {
             add(root, val);
         }
     }
 
     public int countLeaves() {
-        return searchLeaves(root, 0);
+        return searchLeaves(root);
     }
 
-    private void add(Node<T> root, T val) {
-        if (val.compareTo(root.val()) < 0) {
-            if (root.left() == null) {
-                root.setLeft(new Node<>(val));
+    private void add(Node<T> node, T val) {
+        if (val.compareTo(node.val()) < 0) {
+            if (node.left() == null) {
+                node.setLeft(new Node<>(val));
             } else {
-                add(root.left(), val);
+                add(node.left(), val);
             }
         } else {
-            if (root.right() == null) {
-                root.setRight(new Node<>(val));
+            if (node.right() == null) {
+                node.setRight(new Node<>(val));
             } else {
-                add(root.right(), val);
+                add(node.right(), val);
             }
         }
     }
 
-    private int searchLeaves(Node<T> root, int leaves) {
-        if (root.isLeafNode()) {
-            return ++leaves;
+    private int searchLeaves(Node<T> node) {
+        if (node.isLeafNode()) {
+            return 1;
         }
-        if (root.left() != null) {
-            leaves = searchLeaves(root.left(), leaves);
+        int leaves = 0;
+        if (node.left() != null) {
+            leaves += searchLeaves(node.left());
         }
-        if (root.right() != null) {
-            leaves = searchLeaves(root.right(), leaves);
+        if (node.right() != null) {
+            leaves += searchLeaves(node.right());
         }
         return leaves;
     }

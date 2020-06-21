@@ -1,7 +1,7 @@
 package ru.isaev.lesson32;
 
 class Node<T extends Comparable<T>> {
-    private T val;
+    private final T val;
     private Node<T> left = null;
     private Node<T> right = null;
 
@@ -15,10 +15,6 @@ class Node<T extends Comparable<T>> {
 
     T val() {
         return val;
-    }
-
-    void setVal(T val) {
-        this.val = val;
     }
 
     Node<T> left() {
