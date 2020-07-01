@@ -25,10 +25,11 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     public int countLeaves() {
-        return searchLeaves(root);
+        return countLeaves(root);
     }
 
     private void add(Node<T> node, T val) {
+        if (val == node.val()) return;
         if (val.compareTo(node.val()) < 0) {
             if (node.left() == null) {
                 node.setLeft(new Node<>(val));
@@ -44,17 +45,9 @@ public class BinaryTree<T extends Comparable<T>> {
         }
     }
 
-    private int searchLeaves(Node<T> node) {
-        if (node.isLeafNode()) {
-            return 1;
-        }
-        int leaves = 0;
-        if (node.left() != null) {
-            leaves += searchLeaves(node.left());
-        }
-        if (node.right() != null) {
-            leaves += searchLeaves(node.right());
-        }
-        return leaves;
+    private int countLeaves(Node<T> node) {
+        if (node == null) return 0;
+        if (node.isLeafNode()) return 1;
+        return countLeaves(node.left()) + countLeaves(node.right());
     }
 }
