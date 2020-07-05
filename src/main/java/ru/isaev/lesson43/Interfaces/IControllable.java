@@ -1,6 +1,7 @@
 package ru.isaev.lesson43.Interfaces;
 
 public interface IControllable {
+
     void viewAllBooks();
 
     void regNewReader(String firstName, String lastName);

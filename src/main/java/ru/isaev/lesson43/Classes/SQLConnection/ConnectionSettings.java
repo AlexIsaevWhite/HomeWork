@@ -7,6 +7,12 @@ public class ConnectionSettings implements Serializable {
     private final String dbUrl;
     private java.sql.Connection connection;
 
+    /**
+     * Настройки соединения с базой данных
+     *
+     * @param password пароль для соединения
+     * @param dbUrl    адрес БД
+     */
     public ConnectionSettings(String password, String dbUrl) {
         this.password = password;
         this.dbUrl = dbUrl;

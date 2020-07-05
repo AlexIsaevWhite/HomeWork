@@ -11,6 +11,12 @@ public class StatementCaller implements ILoggable {
     java.sql.Connection con;
     Statement stat;
 
+    /**
+     * Объект осуществления отдачи SQL команд БД
+     *
+     * @param sqlCon   соединение, через которое будет осуществляться отдача команд
+     * @param username имя пользователя, от лица которого будут отправляться команды
+     */
     public StatementCaller(SqlConnection sqlCon, String username) {
         con = sqlCon.getConnection(username);
         try {
@@ -20,6 +26,12 @@ public class StatementCaller implements ILoggable {
         }
     }
 
+    /**
+     * Отправка запроса с получение результата
+     *
+     * @param sb принимаемый объект StatementBuilder с собранными внутри командами
+     * @return результат запроса
+     */
     public ResultSet callResStat(StatementBuilder sb) {
         if (sb == null) {
             LOGGER.warn("StatementBuilder is null");
@@ -44,6 +56,11 @@ public class StatementCaller implements ILoggable {
         return null;
     }
 
+    /**
+     * Отправка запроса на изменение содержимого БД
+     *
+     * @param sb принимаемый объект StatementBuilder с собранными внутри командами
+     */
     public void callUpdStat(StatementBuilder sb) {
         if (sb == null) {
             LOGGER.warn("StatementBuilder is null");

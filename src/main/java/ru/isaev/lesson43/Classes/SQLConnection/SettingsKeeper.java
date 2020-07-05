@@ -10,6 +10,12 @@ import java.util.Base64;
 public abstract class SettingsKeeper implements ILoggable {
     private final static Path DEFAULT_PATH = Paths.get("SQLSettings");
 
+    /**
+     * Чтение настроек SQL соединения из файла
+     *
+     * @param filename название файла
+     * @return объект SQL соеднения
+     */
     public static SqlConnection readFile(String filename) {
         File file = new File(DEFAULT_PATH.toString(), filename + ".bin");
         try {
@@ -33,6 +39,13 @@ public abstract class SettingsKeeper implements ILoggable {
         return null;
     }
 
+    /**
+     * Запись настроек соединения в файл
+     *
+     * @param filename      название файла
+     * @param sqlConnection объект SQL соеднения
+     * @return успешен ли был процесс
+     */
     public static boolean writeFile(String filename, SqlConnection sqlConnection) {
         File file = new File(DEFAULT_PATH.toString(), filename + ".bin");
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));

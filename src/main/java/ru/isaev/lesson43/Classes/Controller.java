@@ -26,6 +26,11 @@ public class Controller implements IControllable, ILoggable {
     private final String allTables = booksTable + ", " + readersTable + ", " + registerTable;
     private SqlConnection sqlCon;
 
+    /**
+     * Контроллер осуществояющий связь различных модулей управления БД
+     *
+     * @param jdbcDriver драйвер, через который будет осуществляться управление
+     */
     public Controller(String jdbcDriver) {
         sqlCon = SettingsKeeper.readFile(jdbcDriver);
         if (sqlCon == null) {
@@ -38,18 +43,34 @@ public class Controller implements IControllable, ILoggable {
         }
     }
 
+    /**
+     * Добавление настроек соединения с JDBCDriver
+     *
+     * @param username имя пользователя
+     * @param password пароль доступа
+     * @param dbUrl    адресс SQL БД
+     */
     public void addConnection(String username, String password, String dbUrl) {
         sqlCon.addConnection(username, new ConnectionSettings(password, dbUrl));
     }
 
+    /**
+     * Соединение со всеми БД
+     */
     public void connectAll() {
         sqlCon.connectAll();
     }
 
+    /**
+     * Сохранение настроек соединений в файл
+     */
     public void saveConnections() {
         SettingsKeeper.writeFile(sqlCon.jdbcDriver(), sqlCon);
     }
 
+    /**
+     * Инициализация библиотеки
+     */
     public void createLibrary() {
         for (String activeUser : sqlCon.getActiveUsers()) {
             StatementCaller stCall = new StatementCaller(sqlCon, activeUser);

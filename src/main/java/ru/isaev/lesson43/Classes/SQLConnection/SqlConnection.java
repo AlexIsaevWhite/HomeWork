@@ -17,9 +17,10 @@ public class SqlConnection implements Serializable, ILoggable {
     private final String jdbcDriver;
 
     /**
-     * @param jdbcDriver
+     * Объект SQL соеднения, хранящий в себе логины и пароли соединения через jdbcDriver
      *
-     * @throws ConnectIOException
+     * @param jdbcDriver драйвер, через который осуществляется соединение с БД
+     * @throws ConnectIOException Исключение, которое выбрасывается при неправильном подключении к драйверу
      */
     public SqlConnection(String jdbcDriver) throws ConnectIOException {
         if (jdbcDriver == null) {
@@ -34,10 +35,21 @@ public class SqlConnection implements Serializable, ILoggable {
         }
     }
 
+    /**
+     * Возвращаемое значение используемого драйвера
+     *
+     * @return драйвер, который был задан при содзании объекта SQLConnection
+     */
     public String jdbcDriver() {
         return jdbcDriver;
     }
 
+    /**
+     * Добавление настроек соединения с JDBCDriver
+     *
+     * @param username           имя пользователя
+     * @param connectionSettings объект, хранящий в себе настройки соединения для данного пользователя
+     */
     public void addConnection(String username, ConnectionSettings connectionSettings) {
         if (username == null || connectionSettings == null) {
             LOGGER.warn("Username or ConnectionOption is null");
@@ -46,6 +58,11 @@ public class SqlConnection implements Serializable, ILoggable {
         connections.put(username, connectionSettings);
     }
 
+    /**
+     * Удаление настроек соединения
+     *
+     * @param username пользователь, чьи данные будут удалены
+     */
     public void delConnection(String username) {
         if (username == null) {
             LOGGER.warn("Username is null");
@@ -54,6 +71,9 @@ public class SqlConnection implements Serializable, ILoggable {
         connections.remove(username);
     }
 
+    /**
+     * Попытка соединения со всеми незадействованными подключениями
+     */
     public void connectAll() {
         for (Map.Entry<String, ConnectionSettings> c : connections.entrySet()) {
             try {
@@ -69,10 +89,19 @@ public class SqlConnection implements Serializable, ILoggable {
         }
     }
 
+    /**
+     * Закрытие всех соединений
+     */
     public void closeAll() {
         connections.keySet().forEach(this::closeConnect);
     }
 
+    /**
+     * Выдача объекта работающего подключения к БД для запросов SQL
+     *
+     * @param username имя пользователя
+     * @return работающее подключение к БД
+     */
     public java.sql.Connection getConnection(String username) {
         if (username == null) {
             LOGGER.warn("Username is null");
@@ -90,6 +119,11 @@ public class SqlConnection implements Serializable, ILoggable {
         return null;
     }
 
+    /**
+     * Закрытие определенного подключения
+     *
+     * @param username имя пользователя, для которого подключенние будет разорвано
+     */
     public void closeConnect(String username) {
         if (username == null) {
             LOGGER.warn("Username is null");
@@ -106,6 +140,11 @@ public class SqlConnection implements Serializable, ILoggable {
         }
     }
 
+    /**
+     * Запрос на предоставление списка активных пользователей
+     *
+     * @return список активных пользователей
+     */
     public Set<String> getActiveUsers() {
         Set<String> userNames = new HashSet<>();
         for (Map.Entry<String, ConnectionSettings> c : connections.entrySet()) {
