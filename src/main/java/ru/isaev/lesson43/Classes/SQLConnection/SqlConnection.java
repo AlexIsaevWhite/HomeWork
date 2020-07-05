@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class SqlConnection implements Serializable, ILoggable {
     private Map<String, ConnectionSettings> connections;
@@ -16,7 +18,7 @@ public class SqlConnection implements Serializable, ILoggable {
 
     /**
      * @param jdbcDriver
-     * @param numbersOfConnection
+     *
      * @throws ConnectIOException
      */
     public SqlConnection(String jdbcDriver) throws ConnectIOException {
@@ -102,5 +104,34 @@ public class SqlConnection implements Serializable, ILoggable {
         } catch (SQLException e) {
             LOGGER.warn("Database access error", e);
         }
+    }
+
+    public Set<String> getActiveUsers() {
+        Set<String> userNames = new HashSet<>();
+        for (Map.Entry<String, ConnectionSettings> c : connections.entrySet()) {
+            try {
+                if (!c.getValue().connection().isClosed()) {
+                    userNames.add(c.getKey());
+                }
+            } catch (SQLException e) {
+                LOGGER.warn("Database access error with username: " + c.getKey());
+            }
+        }
+        return userNames;
+    }
+
+    SqlConnection getCopy() {
+        try {
+            SqlConnection clone = new SqlConnection(jdbcDriver);
+            for (Map.Entry<String, ConnectionSettings> c : connections.entrySet()) {
+                ConnectionSettings orig = c.getValue();
+                ConnectionSettings cloneSettings = new ConnectionSettings(orig.password(), orig.dbUrl());
+                clone.addConnection(c.getKey(), cloneSettings);
+            }
+            return clone;
+        } catch (ConnectIOException e) {
+            LOGGER.trace(e.getMessage(), e);
+        }
+        return null;
     }
 }

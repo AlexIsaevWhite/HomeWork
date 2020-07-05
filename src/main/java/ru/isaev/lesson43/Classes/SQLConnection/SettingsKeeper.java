@@ -22,7 +22,8 @@ public abstract class SettingsKeeper implements ILoggable {
                     throw new ClassNotFoundException();
                 }
             } catch (FileNotFoundException e) {
-                LOGGER.warn("File not found. New file is created: " + writeFile(filename, null));
+                boolean isCreated = file.getParentFile().mkdirs() && file.createNewFile();
+                LOGGER.warn("File not found. New file is created: " + isCreated);
             } catch (ClassNotFoundException e) {
                 LOGGER.trace("File is broken. New file is created: " + file.createNewFile());
             }
@@ -36,7 +37,7 @@ public abstract class SettingsKeeper implements ILoggable {
         File file = new File(DEFAULT_PATH.toString(), filename + ".bin");
         try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
              ObjectOutputStream oos = new ObjectOutputStream(Base64.getEncoder().wrap(bos))) {
-            oos.writeObject(sqlConnection);
+            oos.writeObject(sqlConnection.getCopy());
             return true;
         } catch (FileNotFoundException e) {
             LOGGER.trace("Path to file is not exist. Path is created: " + file.getParentFile().mkdirs());
