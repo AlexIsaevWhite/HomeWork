@@ -57,6 +57,7 @@ public class Controller implements IControllable, ILoggable {
             stBuild.selectTable("*", allTables, null);
             ResultSet rs = stCall.callResStat(stBuild);
             if (rs != null) return;
+            LOGGER.info("create tables");
             createLibrary(stBuild, stCall);
         }
     }
@@ -83,12 +84,21 @@ public class Controller implements IControllable, ILoggable {
 
     @Override
     public void regNewReader(String firstName, String lastName) {
-        //регистрировать новых читателей;
         for (String activeUser : sqlCon.getActiveUsers()) {
             StatementCaller stCall = new StatementCaller(sqlCon, activeUser);
             StatementBuilder stBuild = new StatementBuilder();
-
-            stBuild.addIntColumn(registerTable, 0, registerColumn);
+            String columns = readersColumn1 + ", " + readersColumn2;
+            String term1 = readersColumn1 + "=" + "'" + firstName + "'";
+            String term2 = readersColumn2 + "=" + "'" + lastName + "'";
+            stBuild.selectTable(columns, readersTable, null, term1, term2);
+            ResultSet rs = stCall.callResStat(stBuild);
+            try {
+                if (rs.next()) return;
+            } catch (SQLException e) {
+                LOGGER.warn(e.getMessage());
+            }
+            stBuild.reset();
+            stBuild.insertTable(readersTable, columns, firstName, lastName);
             stCall.callUpdStat(stBuild);
         }
     }

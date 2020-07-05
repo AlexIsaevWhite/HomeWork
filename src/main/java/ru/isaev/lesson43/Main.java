@@ -17,5 +17,7 @@ public class Main {
     public static void main(String[] args) {
         IControllable librarian = new Main().library;
         librarian.viewAllBooks();
+        librarian.regNewReader("Иван", "Иванов");
+        librarian.regNewReader("Карл", "Маркс");
     }
 }

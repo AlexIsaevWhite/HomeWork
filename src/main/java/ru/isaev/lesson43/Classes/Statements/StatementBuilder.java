@@ -65,9 +65,10 @@ public class StatementBuilder {
             isResultState = true;
         }
         statStr.append(" SELECT ").append(columnsName).append(" FROM ").append(tablesName).append(" ");
-        if (terms.length == 1) {
+        if (terms.length >= 1) {
+            statStr.append(" WHERE ");
             for (String t : terms) {
-                statStr.append(" WHERE ").append(t).append(" AND ");
+                statStr.append(t).append(" AND ");
             }
             int lastInd = statStr.length();
             statStr.delete(lastInd - 4, lastInd);
